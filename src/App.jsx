@@ -1,6 +1,7 @@
 import NotFound from "components/NotFound/NotFound";
 import Layout from "Layout/Layout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import menus from "stores/menus";
 import Normalize from "Styles/Normalize";
 import Reset from "Styles/Reset";
 import VendingMachine from "views/VendingMachine/VendingMachine";
@@ -14,7 +15,7 @@ const App = () => {
 
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Layout menusData={menus} />}>
             <Route path="/" element={<VendingMachine />} />
             <Route path="/wallet" element={<Wallet />} />
           </Route>

@@ -1,11 +1,18 @@
-import menus from "stores/menus";
+import styled from "styled-components";
 import NavItem from "./NavItem/NavItem";
 
-const menuItems = menus;
-const Navbar = () => {
-  return menuItems.map((menuItem) => (
-    <NavItem menuItem={menuItem} key={menuItem.id} />
-  ));
+const Menus = ({ data }) => {
+  return data.map((item) => <NavItem menuItem={item} key={item.id} />);
 };
+
+const Navbar = ({ menusData }) => {
+  return (
+    <Wrapper>
+      <Menus data={menusData} />
+    </Wrapper>
+  );
+};
+
+const Wrapper = styled.div``;
 
 export default Navbar;
