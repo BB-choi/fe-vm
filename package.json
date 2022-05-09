@@ -33,6 +33,7 @@
       "react/react-in-jsx-scope": 0,
       "react/jsx-boolean-value": 0,
       "import/no-unresolved": "off",
+      "react/prop-types": 0,
       "react/function-component-definition": [
         1,
         {

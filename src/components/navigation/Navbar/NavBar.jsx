@@ -1,5 +1,11 @@
+import menus from "stores/menus";
+import NavItem from "./NavItem/NavItem";
+
+const menuItems = menus;
 const Navbar = () => {
-  return <div>네비게이션바</div>;
+  return menuItems.map((menuItem) => (
+    <NavItem menuItem={menuItem} key={menuItem.id} />
+  ));
 };
 
 export default Navbar;
