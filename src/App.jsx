@@ -1,5 +1,5 @@
-import Navbar from "components/navigation/Navbar/NavBar";
 import NotFound from "components/NotFound/NotFound";
+import Layout from "Layout/Layout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Test from "./Test";
 
@@ -15,11 +15,11 @@ const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
-
         <Routes>
-          <Route index element={<Message />} />
-          <Route path="/test" element={<Test />} />
+          <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Message />} />
+            <Route path="/test" element={<Test />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
