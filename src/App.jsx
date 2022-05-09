@@ -1,4 +1,5 @@
 import Navbar from "components/navigation/Navbar/NavBar";
+import NotFound from "components/NotFound/NotFound";
 import { Routes, Route } from "react-router-dom";
 import Test from "./Test";
 
@@ -15,8 +16,9 @@ const App = () => {
     <div className="App">
       <Navbar />
       <Routes>
-        <Route path="/" exact={true} element={<Message />} />
+        <Route path="/" element={<Message />} />
         <Route path="/test" element={<Test />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
