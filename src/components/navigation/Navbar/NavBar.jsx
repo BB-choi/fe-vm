@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import NavItem from "./NavItem/NavItem";
 
 const Menus = ({ data }) => {
@@ -6,13 +5,7 @@ const Menus = ({ data }) => {
 };
 
 const Navbar = ({ menusData }) => {
-  return (
-    <Wrapper>
-      <Menus data={menusData} />
-    </Wrapper>
-  );
+  return <Menus data={menusData} />;
 };
-
-const Wrapper = styled.div``;
 
 export default Navbar;
