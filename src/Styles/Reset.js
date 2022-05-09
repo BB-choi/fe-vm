@@ -50,6 +50,11 @@ const Reset = createGlobalStyle`
   }
 
   /* custom-reset */
+  button{
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+  }
 `;
 
 export default Reset;
