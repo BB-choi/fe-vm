@@ -12,7 +12,7 @@ const InsertMoneyArea = () => {
         <Input
           type="number"
           value={0}
-          style={{ size: { width: "70%", height: "2rem" }, fontSize: "2rem" }}
+          style={{ size: { width: "80%", height: "2rem" }, fontSize: "2rem" }}
         />{" "}
         {CURRENCY}
       </div>

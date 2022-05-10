@@ -1,7 +1,6 @@
+import DispenseArea from "components/VendingMachine/DispenseArea/DispenseArea";
+import ProductList from "components/VendingMachine/ProductList/ProductList";
 import styled from "styled-components";
-
-import DispenseArea from "./DispenseArea/DispenseArea";
-import ProductList from "./ProductList/ProductList";
 
 const VendingMachine = () => {
   return (
