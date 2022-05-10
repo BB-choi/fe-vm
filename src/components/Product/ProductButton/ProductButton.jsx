@@ -1,16 +1,23 @@
 import styled from "styled-components";
 
-const ProductButton = ({ productData, style: { width, fontSize } }) => {
+const ProductButton = ({
+  productData,
+  style: { size, fontSize, border, margin },
+}) => {
   return (
-    <Button width={width} fontSize={fontSize}>
+    <Button size={size} fontSize={fontSize} border={border} margin={margin}>
       {productData.productName}
     </Button>
   );
 };
 
 const Button = styled.button`
-  width: ${({ width }) => width};
+  width: ${({ size }) => size.width};
+  height: ${({ size }) => size.height};
   font-size: ${({ fontSize }) => fontSize};
+  margin: ${({ margin }) => margin};
+  border: ${({ border }) => border};
+  border-color: #000;
 `;
 
 export default ProductButton;

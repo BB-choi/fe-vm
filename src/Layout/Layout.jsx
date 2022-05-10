@@ -18,12 +18,12 @@ const Layout = ({ menusData }) => {
 
 const Wrap = styled.div`
   margin: 0 auto;
-  width: 80rem;
-  height: 40rem;
+  width: 80%;
+  height: 100%;
 
   .gnb {
-    margin: 3rem 0 1rem;
     text-align: center;
+    margin: 1rem 0;
   }
 `;
 

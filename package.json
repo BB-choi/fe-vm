@@ -30,8 +30,10 @@
       "comma-dangle": 0,
       "linebreak-style": 0,
       "arrow-body-style": 0,
+      "object-curly-newline": "off",
       "react/react-in-jsx-scope": 0,
       "react/jsx-boolean-value": 0,
+      "react/jsx-one-expression-per-line": 0,
       "import/no-unresolved": "off",
       "react/prop-types": 0,
       "react/function-component-definition": [

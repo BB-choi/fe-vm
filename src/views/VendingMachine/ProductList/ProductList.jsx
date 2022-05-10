@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 import ProductButton from "components/Product/ProductButton/ProductButton";
 import ProductPrice from "components/Product/ProductPrice/ProductPrice";
@@ -12,7 +12,12 @@ const ProductLi = ({ productsData }) => {
     <Li key={product.id}>
       <ProductButton
         productData={product}
-        style={{ width: "100%", fontSize: "1.3rem" }}
+        style={{
+          size: { width: "90%", height: "2.5rem" },
+          fontSize: "1.3rem",
+          border: "1px solid",
+          margin: "0 auto",
+        }}
       />
       <ProductPrice productData={product} />
     </Li>
@@ -20,7 +25,8 @@ const ProductLi = ({ productsData }) => {
 };
 
 const ProductList = () => {
-  const [productsData, setProductsData] = useState(productsList);
+  // const [productsData, setProductsData] = useState(productsList);
+  const productsData = productsList;
 
   return (
     <ProductUl>

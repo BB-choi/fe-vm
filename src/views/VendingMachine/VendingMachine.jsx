@@ -1,21 +1,45 @@
 import styled from "styled-components";
 
+import DispenseArea from "./DispenseArea/DispenseArea";
 import ProductList from "./ProductList/ProductList";
 
 const VendingMachine = () => {
   return (
-    <ProductListWrapper>
-      <ProductList />
-    </ProductListWrapper>
+    <Wrapper>
+      <ProductListWrapper>
+        <ProductList />
+      </ProductListWrapper>
+
+      <ProgressWrapper>
+        <DispenseArea />
+      </ProgressWrapper>
+    </Wrapper>
   );
 };
 
-const ProductListWrapper = styled.div`
-  width: 60%;
+const Wrapper = styled.div`
+  display: flex;
+
+  width: 100%;
   height: 100%;
+
+  div:not(:last-child) {
+    margin-right: 1rem;
+  }
+`;
+
+const ProductListWrapper = styled.div`
+  width: 65%;
   padding: 1rem;
   border: 2px solid #000;
   text-align: center;
+`;
+
+const ProgressWrapper = styled.div`
+  width: 35%;
+  padding: 1rem;
+
+  border: 2px solid #000;
 `;
 
 export default VendingMachine;
