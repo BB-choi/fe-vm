@@ -1,7 +1,7 @@
-import Normalize from "Styles/Normalize";
-import Reset from "Styles/Reset";
 import menus from "mockData/menus";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Normalize from "styles/Normalize";
+import Reset from "styles/Reset";
 
 import Layout from "./views/Layout/Layout";
 import NotFound from "./views/NotFound/NotFound";
