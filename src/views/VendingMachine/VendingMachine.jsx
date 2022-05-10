@@ -15,6 +15,7 @@ const ProductListWrapper = styled.div`
   height: 100%;
   padding: 1rem;
   border: 2px solid #000;
+  text-align: center;
 `;
 
 export default VendingMachine;
