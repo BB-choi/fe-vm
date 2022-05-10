@@ -28,7 +28,7 @@ const Wrap = styled.div`
 `;
 
 const Main = styled.main`
-  height: 30rem;
+  height: 40rem;
 `;
 
 export default Layout;
