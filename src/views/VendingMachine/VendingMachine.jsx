@@ -36,6 +36,7 @@ const ProductListWrapper = styled.div`
 
 const ProgressWrapper = styled.div`
   width: 35%;
+  height: 100%;
   padding: 1rem;
 
   border: 2px solid #000;

@@ -11,7 +11,7 @@ const InsertMoneyArea = () => {
       <Button
         data={{ name: "투입" }}
         style={{
-          size: { width: "4rem", height: "2rem" },
+          size: { width: "4rem", height: "3rem" },
           fontSize: "1.3rem",
           color: "#fff",
           bgColor: "#000",
