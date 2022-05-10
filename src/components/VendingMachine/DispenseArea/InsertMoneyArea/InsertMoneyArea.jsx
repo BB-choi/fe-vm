@@ -1,13 +1,14 @@
 import Button from "components/form/Button/Button";
 import Input from "components/form/Input/Input";
 import constants from "mockData/constants";
-import styled from "styled-components";
+
+import Wrapper from "./InsertMoneyArea.styled";
 
 const InsertMoneyArea = () => {
   const { CURRENCY } = constants;
 
   return (
-    <Wrap>
+    <Wrapper>
       <div className="input-wrap">
         <Input
           type="number"
@@ -26,19 +27,8 @@ const InsertMoneyArea = () => {
           margin: "0",
         }}
       />
-    </Wrap>
+    </Wrapper>
   );
 };
-
-const Wrap = styled.div`
-  font-size: 1.2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .input-wrap {
-    width: 100%;
-  }
-`;
 
 export default InsertMoneyArea;
