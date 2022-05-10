@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 const Button = ({ data, style, className }) => {
   return (
-    <StyledButton style={style} className={className}>
+    <StyledButton style={style} className={className} title={data.name}>
       {data.name}
     </StyledButton>
   );
@@ -20,6 +20,8 @@ const StyledButton = styled.button`
       background-color: ${bgColor || "#fff"};
     `;
   }}
+  letter-spacing: -0.7px;
+  word-break: keep-all;
   border-color: #000;
 `;
 

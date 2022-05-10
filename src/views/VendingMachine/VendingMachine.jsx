@@ -29,18 +29,15 @@ const Wrapper = styled.div`
 `;
 
 const ProductListWrapper = styled.div`
-  width: 65%;
+  width: 60%;
   padding: 1rem;
   border: 2px solid #000;
-  background-color: #ccc;
-
-  li {
-    background-color: #fff;
-  }
+  border-radius: 1rem;
+  background-color: #fe001a;
 `;
 
 const ProgressWrapper = styled.div`
-  width: 35%;
+  width: 40%;
   height: 100%;
   padding: 1rem;
 
