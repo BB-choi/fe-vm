@@ -32,7 +32,6 @@ const ProductListWrapper = styled.div`
   width: 65%;
   padding: 1rem;
   border: 2px solid #000;
-  text-align: center;
 `;
 
 const ProgressWrapper = styled.div`

@@ -1,4 +1,4 @@
-import Input from "components/form/Input";
+import Input from "components/form/Input/Input";
 import constants from "mockData/constants";
 
 const InsertMoneyArea = () => {
