@@ -1,10 +1,10 @@
 import menus from "mockData/menus";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Normalize from "styles/Normalize";
+import Reset from "styles/Reset";
 
 import Layout from "./Layout/Layout";
-import NotFound from "./components/NotFound/NotFound";
-import Normalize from "./styles/Normalize";
-import Reset from "./styles/Reset";
+import NotFound from "./views/NotFound/NotFound";
 import VendingMachine from "./views/VendingMachine/VendingMachine";
 import Wallet from "./views/Wallet/Wallet";
 
