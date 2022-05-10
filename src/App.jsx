@@ -1,8 +1,8 @@
+import menus from "mockData/menus";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import NotFound from "./components/NotFound/NotFound";
 import Layout from "./Layout/Layout";
-import menus from "./mockData/menus";
+import NotFound from "./components/NotFound/NotFound";
 import Normalize from "./styles/Normalize";
 import Reset from "./styles/Reset";
 import VendingMachine from "./views/VendingMachine/VendingMachine";
@@ -20,7 +20,6 @@ const App = () => {
             <Route path="/" element={<VendingMachine />} />
             <Route path="/wallet" element={<Wallet />} />
           </Route>
-
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

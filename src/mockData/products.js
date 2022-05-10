@@ -22,3 +22,5 @@ const products = {
     { id: 19, productName: "칸쵸", price: 1000 },
   ],
 };
+
+export default products;
