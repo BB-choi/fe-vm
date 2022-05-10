@@ -1,5 +1,3 @@
-// import { useState } from "react";
-
 import Button from "components/form/Button/Button";
 import products from "mockData/products";
 import styled from "styled-components";
@@ -24,7 +22,6 @@ const ProductLi = ({ productsData }) => {
 };
 
 const ProductList = () => {
-  // const [productsData, setProductsData] = useState(productsList);
   const productsData = productsList;
 
   return (
