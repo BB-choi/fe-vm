@@ -22,10 +22,6 @@ const Wrapper = styled.div`
 
   width: 100%;
   height: 100%;
-
-  div:not(:last-child) {
-    margin-right: 1rem;
-  }
 `;
 
 const ProductListWrapper = styled.div`
@@ -34,6 +30,7 @@ const ProductListWrapper = styled.div`
   border: 2px solid #000;
   border-radius: 1rem;
   background-color: #fe001a;
+  margin-right: 1rem;
 `;
 
 const ProgressWrapper = styled.div`
