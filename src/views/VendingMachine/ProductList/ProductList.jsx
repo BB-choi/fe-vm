@@ -7,10 +7,10 @@ import styled from "styled-components";
 const { productsList } = products;
 
 const ProductLi = ({ productsData }) => {
-  return productsData.map((product) => (
-    <Li key={product.id}>
+  return productsData.map((productData) => (
+    <Li key={productData.id}>
       <Button
-        productData={product}
+        data={productData}
         style={{
           size: { width: "90%", height: "2.5rem" },
           fontSize: "1.3rem",
@@ -18,7 +18,7 @@ const ProductLi = ({ productsData }) => {
           margin: "0 auto",
         }}
       />
-      <p className="product-price">{product.price}</p>
+      <p className="product-price">{productData.price}</p>
     </Li>
   ));
 };
