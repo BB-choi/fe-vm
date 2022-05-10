@@ -1,5 +1,27 @@
+import cash from "mockData/money";
+import styled from "styled-components";
+
+import MoneyItem from "./MoneyItem/MoneyItem";
+
 const Wallet = () => {
-  return <div>여기는 Wallet.jsx입니다.</div>;
+  const currentMoney = Object.entries(cash);
+
+  return (
+    <Wrapper>
+      {currentMoney.map(([money, count]) => (
+        <MoneyItem cash={money} count={count} key={money} />
+      ))}
+    </Wrapper>
+  );
 };
+
+const Wrapper = styled.ul`
+  width: 11rem;
+  height: 100%;
+  padding: 1rem;
+
+  margin: 0 auto;
+  border: 2px solid #000;
+`;
 
 export default Wallet;

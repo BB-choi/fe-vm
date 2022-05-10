@@ -1,7 +1,11 @@
 import styled, { css } from "styled-components";
 
-const Button = ({ data, style }) => {
-  return <StyledButton style={style}>{data.name}</StyledButton>;
+const Button = ({ data, style, className }) => {
+  return (
+    <StyledButton style={style} className={className}>
+      {data.name}
+    </StyledButton>
+  );
 };
 
 const StyledButton = styled.button`
