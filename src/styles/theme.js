@@ -8,6 +8,7 @@ const colors = {
 
 const whitespace = {
   default: "1rem",
+  small: "0.5rem",
 };
 
 const borders = {
@@ -32,6 +33,8 @@ const fontStyles = {
       color: colors.black,
     },
   },
+  normal: "1.1rem",
+  large: "1.3rem",
 };
 
 const theme = { whitespace, borders, colors, fontStyles };

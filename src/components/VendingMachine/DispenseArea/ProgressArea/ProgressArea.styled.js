@@ -1,13 +1,15 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const Wrapper = styled.div`
-  font-size: 1.1rem;
+  ${({ theme: { fontStyles, colors, whitespace } }) => css`
+    font-size: ${fontStyles.normal};
+    background-color: ${colors.black};
+    color: ${colors.white};
+    padding: ${whitespace.default};
+  `};
   height: calc(100% - 10rem);
   max-height: calc(100% - 10rem);
   overflow-y: auto;
-  background-color: #000;
-  color: #fff;
-  padding: 1rem;
 `;
 
 export default Wrapper;

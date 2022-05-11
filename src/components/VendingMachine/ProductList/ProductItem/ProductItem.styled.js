@@ -6,6 +6,11 @@ const productButtonStyle = {
   fontStyle: theme.fontStyles.buttons.small,
   border: `1px solid ${theme.colors.black}`,
   margin: "0 auto",
+  hover: {
+    backgroundColor: theme.colors.darkblue,
+    color: theme.colors.white,
+    fontWeight: "600",
+  },
 };
 
 const ProductLi = styled.li`
@@ -14,12 +19,6 @@ const ProductLi = styled.li`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  .product-button:hover {
-    background-color: #006ba8;
-    color: #fff;
-    font-weight: 600;
-  }
 
   .product-price {
     text-align: center;

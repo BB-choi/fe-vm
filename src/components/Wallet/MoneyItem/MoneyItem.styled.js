@@ -13,7 +13,7 @@ const MoneyLi = styled.li`
   display: flex;
 
   &:not(:last-child) {
-    margin-bottom: 0.5rem;
+    margin-bottom: ${({ theme: { whitespace } }) => whitespace.small};
   }
 
   .money {
@@ -22,10 +22,10 @@ const MoneyLi = styled.li`
 
   .count {
     width: 4rem;
-    font-size: 1.3rem;
+    font-size: ${({ theme: { fontStyles } }) => fontStyles.large};
     line-height: 3rem;
     text-align: center;
-    border-bottom: 2px solid #000;
+    border-bottom: ${({ theme: { borders } }) => borders.bold};
   }
 `;
 

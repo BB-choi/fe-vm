@@ -8,7 +8,7 @@ const navButtonStyle = {
   fontStyle: theme.fontStyles.nav,
   hover: {
     backgroundColor: theme.colors.black,
-    borderRadius: "1rem",
+    borderRadius: theme.whitespace.default,
     color: theme.colors.white,
   },
 };
