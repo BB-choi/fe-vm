@@ -13,6 +13,17 @@ const whitespace = {
 
 const borders = {
   bold: `2px solid ${colors.black}`,
+  normal: `1px solid ${colors.black}`,
+};
+
+const fontSizes = {
+  normal: "1.1rem",
+  large: "1.3rem",
+};
+
+const fontWeights = {
+  mediumBold: "600",
+  bold: "800",
 };
 
 const fontStyles = {
@@ -20,23 +31,28 @@ const fontStyles = {
     fontSize: "1.5rem",
     lineHeight: "3rem",
     color: colors.black,
-    fontWeight: 800,
+    fontWeight: fontWeights.bold,
   },
   buttons: {
     large: {
       fontSize: "1.3rem",
       color: colors.white,
-      fontWeight: 600,
+      fontWeight: fontWeights.mediumBold,
     },
     small: {
       fontSize: "1.1rem",
       color: colors.black,
     },
   },
-  normal: "1.1rem",
-  large: "1.3rem",
 };
 
-const theme = { whitespace, borders, colors, fontStyles };
+const theme = {
+  whitespace,
+  borders,
+  colors,
+  fontStyles,
+  fontSizes,
+  fontWeights,
+};
 
 export default theme;
