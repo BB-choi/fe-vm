@@ -9,7 +9,7 @@ const insertButtonStyle = css`
 `;
 
 const Wrapper = styled.div`
-  font-size: ${({ theme: { fontStyles } }) => fontStyles.normal};
+  font-size: ${({ theme: { fontSizes } }) => fontSizes.normal};
   display: flex;
   justify-content: space-between;
   align-items: center;

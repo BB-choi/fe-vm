@@ -11,6 +11,12 @@ const whitespace = {
   small: "0.5rem",
 };
 
+const sizes = {
+  button: {
+    height: "3rem",
+  },
+};
+
 const borders = {
   bold: `2px solid ${colors.black}`,
   normal: `1px solid ${colors.black}`,
@@ -50,6 +56,7 @@ const theme = {
   whitespace,
   borders,
   colors,
+  sizes,
   fontStyles,
   fontSizes,
   fontWeights,
