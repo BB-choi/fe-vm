@@ -1,4 +1,4 @@
-import Navbar from "components/navigation/Navbar/NavBar";
+import Navbar from "components/Navbar/NavBar";
 import { Outlet } from "react-router-dom";
 
 import { Wrap, Main } from "./Layout.styled";

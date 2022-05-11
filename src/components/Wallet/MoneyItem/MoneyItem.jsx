@@ -1,4 +1,4 @@
-import Button from "components/form/Button/Button";
+import Button from "components/common/form/Button/Button";
 
 import MoneyLi from "./MoneyItem.styled";
 

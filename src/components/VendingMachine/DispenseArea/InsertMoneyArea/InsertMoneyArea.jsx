@@ -1,5 +1,5 @@
-import Button from "components/form/Button/Button";
-import Input from "components/form/Input/Input";
+import Button from "components/common/form/Button/Button";
+import Input from "components/common/form/Input/Input";
 import constants from "mockData/constants";
 
 import Wrapper from "./InsertMoneyArea.styled";
@@ -23,7 +23,7 @@ const InsertMoneyArea = () => {
           size: { width: "25%", height: "3rem" },
           fontSize: "1.3rem",
           color: "#fff",
-          bgColor: "#000",
+          bgColor: "green",
           margin: "0",
         }}
       />

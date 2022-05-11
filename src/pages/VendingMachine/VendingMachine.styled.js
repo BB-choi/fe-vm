@@ -11,8 +11,7 @@ const ProductListWrapper = styled.div`
   width: 60%;
   padding: 1rem;
   border: 2px solid #000;
-  border-radius: 1rem;
-  background-color: #fe001a;
+  background: linear-gradient(#004b93, 80%, #1e1e1e);
   margin-right: 1rem;
 `;
 

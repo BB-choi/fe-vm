@@ -1,4 +1,4 @@
-import Button from "components/form/Button/Button";
+import Button from "components/common/form/Button/Button";
 import styled from "styled-components";
 
 import InsertMoneyArea from "./InsertMoneyArea/InsertMoneyArea";
