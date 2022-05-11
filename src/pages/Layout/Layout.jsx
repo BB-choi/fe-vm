@@ -1,7 +1,8 @@
 import Navbar from "components/Navbar/NavBar";
-import { Outlet } from "react-router-dom";
+// import { Outlet } from "react-router-dom";
 
-import { Wrap, Main } from "./Layout.styled";
+import { Wrap } from "./Layout.styled";
+// import { Wrap, Main } from "./Layout.styled";
 
 const Layout = ({ menusData }) => {
   return (
@@ -10,9 +11,9 @@ const Layout = ({ menusData }) => {
         <Navbar menusData={menusData} />
       </nav>
 
-      <Main>
+      {/* <Main>
         <Outlet />
-      </Main>
+      </Main> */}
     </Wrap>
   );
 };

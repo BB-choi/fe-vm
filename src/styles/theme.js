@@ -17,19 +17,19 @@ const borders = {
 
 const fontStyles = {
   nav: {
-    size: "1.5rem",
+    fontSize: "1.5rem",
     lineHeight: "3rem",
     color: colors.black,
     fontWeight: 800,
   },
   buttons: {
     large: {
-      size: "1.3rem",
+      fontSize: "1.3rem",
       color: colors.white,
       fontWeight: 600,
     },
     small: {
-      size: "1.1rem",
+      fontSize: "1.1rem",
       color: colors.black,
     },
   },
