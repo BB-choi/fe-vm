@@ -2,7 +2,6 @@ import styled, { css } from "styled-components";
 
 const productButtonStyle = css`
   width: 95%;
-  height: 3rem;
   ${({ theme: { fontStyles } }) => fontStyles.buttons.small};
   border: ${({ theme: { borders } }) => borders.normal};
 

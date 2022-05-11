@@ -2,7 +2,6 @@ import styled, { css } from "styled-components";
 
 const insertButtonStyle = css`
   width: 25%;
-  height: 3rem;
   margin: 0;
   ${({ theme: { fontStyles } }) => fontStyles.buttons.large};
   background-color: ${({ theme: { colors } }) => colors.green};
