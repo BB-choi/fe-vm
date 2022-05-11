@@ -7,7 +7,7 @@ const Wrap = styled.div`
 
   .gnb {
     text-align: center;
-    margin: 1rem 0;
+    margin: ${({ theme: { whitespace } }) => whitespace.default} 0;
   }
 `;
 

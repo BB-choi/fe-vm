@@ -1,12 +1,14 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const Wrapper = styled.ul`
+  ${({ theme: { whitespace, borders } }) => css`
+    padding: ${whitespace.default};
+    border: ${borders.bold};
+  `};
+
   width: 11rem;
   height: 100%;
-  padding: 1rem;
-
   margin: 0 auto;
-  border: 2px solid #000;
 `;
 
 export default Wrapper;

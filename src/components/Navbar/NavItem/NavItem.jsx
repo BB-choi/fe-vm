@@ -1,13 +1,13 @@
+import Button from "components/common/form/Button/Button";
 import { Link } from "react-router-dom";
 
-import MenuButton from "./NavItem.styled";
+import navButtonStyle from "./NavItem.styled";
 
 const NavItem = ({ menuItem }) => {
   const { menuName, path } = menuItem;
-
   return (
     <Link to={path}>
-      <MenuButton type="button">{menuName}</MenuButton>
+      <Button style={navButtonStyle} data={{ name: menuName }} />
     </Link>
   );
 };

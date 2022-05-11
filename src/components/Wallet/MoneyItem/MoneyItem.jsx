@@ -1,6 +1,6 @@
 import Button from "components/common/form/Button/Button";
 
-import MoneyLi from "./MoneyItem.styled";
+import { MoneyLi, moneyButtonStyle } from "./MoneyItem.styled";
 
 const Count = ({ data }) => {
   return <p className="count">{data}</p>;
@@ -12,13 +12,7 @@ const MoneyItem = ({ cash, count }) => {
       <Button
         className="money"
         data={{ name: cash }}
-        style={{
-          size: { width: "4rem", height: "3rem" },
-          fontSize: "1.3rem",
-          margin: "0 1rem 0 0",
-          bgColor: "green",
-          color: "#fff",
-        }}
+        style={moneyButtonStyle}
       />
       <Count data={count} />
     </MoneyLi>

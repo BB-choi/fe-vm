@@ -1,4 +1,12 @@
 import styled from "styled-components";
+import theme from "styles/theme";
+
+const moneyButtonStyle = {
+  size: { width: "4rem", height: "3rem" },
+  margin: `0 ${theme.whitespace.default} 0 0`,
+  bgColor: theme.colors.green,
+  fontStyle: theme.fontStyles.buttons.large,
+};
 
 const MoneyLi = styled.li`
   width: 100%;
@@ -21,4 +29,4 @@ const MoneyLi = styled.li`
   }
 `;
 
-export default MoneyLi;
+export { MoneyLi, moneyButtonStyle };
