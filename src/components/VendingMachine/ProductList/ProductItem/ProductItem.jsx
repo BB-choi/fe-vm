@@ -3,6 +3,8 @@ import constants from "mockData/constants";
 
 import { productButtonStyle, ProductLi } from "./ProductItem.styled";
 
+const { SOLDOUT_MESSAGE } = constants;
+
 const ProductItem = ({ productData }) => {
   const { name, isInStock, price } = productData;
 
@@ -14,9 +16,7 @@ const ProductItem = ({ productData }) => {
         className="product-button"
         isDisabled={!isInStock}
       />
-      <p className="product-price">
-        {(isInStock && price) || constants.SOLDOUT_MESSAGE}
-      </p>
+      <p className="product-price">{(isInStock && price) || SOLDOUT_MESSAGE}</p>
     </ProductLi>
   );
 };
