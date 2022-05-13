@@ -1,6 +1,7 @@
-import { Wrapper, MoneyArea, P } from "./TotalMoneyArea.styled";
+import constants from "mockData/constants";
+import numberUtil from "utils/numberUtil";
 
-const TOTAL_MONEY_NAME = "총액";
+import { Wrapper, MoneyArea, P } from "./TotalMoneyArea.styled";
 
 const computeTotalMoney = (moneyData) => {
   const INITIAL_VALUE = 0;
@@ -11,8 +12,11 @@ const computeTotalMoney = (moneyData) => {
   }, INITIAL_VALUE);
 };
 
+const { seperateThousands } = numberUtil;
+const { TOTAL_MONEY_NAME } = constants;
+
 const TotalMoneyArea = ({ moneyData }) => {
-  const totalMoney = computeTotalMoney(moneyData);
+  const totalMoney = seperateThousands(computeTotalMoney(moneyData));
 
   return (
     <Wrapper>
