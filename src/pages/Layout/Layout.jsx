@@ -1,10 +1,10 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from 'react';
 
-import Navbar from "components/Navbar/NavBar";
-import cash from "mockData/money";
-import { Outlet } from "react-router-dom";
+import Navbar from 'components/Navbar/NavBar';
+import cash from 'mockData/money';
+import { Outlet } from 'react-router-dom';
 
-import { Wrap, Main } from "./Layout.styled";
+import { Wrap, Main } from './Layout.styled';
 
 // TODO: context 분리하기
 export const MoneyContext = React.createContext({});
@@ -16,18 +16,15 @@ const Layout = ({ menusData }) => {
 
   // NOTE: useMemo, useCallback사용에도 re-rendering이 되는 곳
   // (lint설정으로 인해 사용해야하기때문에 일단 놔두기😭)
-  const decreaseCashCount = useCallback(
-    (indexNo) =>
-      setCashData(
-        cashData.map((current, i) => {
-          if (i === indexNo) {
-            return { money: current.money, count: current.count - 1 };
-          }
-          return current;
-        })
-      ),
-    [cashData]
-  );
+  const decreaseCashCount = useCallback((money) => {
+    setCashData((prevCashData) =>
+      prevCashData.map((current) => {
+        if (current.money === money) {
+          return { ...current, count: current.count - 1 };
+        }
+        return current;
+      }));
+  }, []);
 
   const money = useMemo(
     () => ({
