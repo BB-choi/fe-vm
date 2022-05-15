@@ -7,8 +7,8 @@ const computeTotalMoney = (moneyData) => {
   const INITIAL_VALUE = 0;
 
   return moneyData.reduce((prev, cur) => {
-    const [money, amount] = cur;
-    return prev + money * amount;
+    const { money, count } = cur;
+    return prev + money * count;
   }, INITIAL_VALUE);
 };
 

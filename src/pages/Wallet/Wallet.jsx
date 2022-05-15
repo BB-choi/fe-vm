@@ -1,17 +1,21 @@
+import { useContext } from "react";
+
 import MoneyItem from "components/Wallet/MoneyItem/MoneyItem";
 import TotalMoneyArea from "components/Wallet/TotalMoneyArea/TotalMoneyArea";
-import cash from "mockData/money";
+import { MoneyContext } from "pages/Layout/Layout";
 
 import Wrapper from "./Wallet.styled";
 
 const Wallet = () => {
-  const currentMoney = Object.entries(cash);
+  const currentMoney = useContext(MoneyContext);
 
   return (
     <Wrapper>
       <ul>
-        {currentMoney.map(([money, count]) => (
-          <MoneyItem cash={money} count={count} key={money} />
+        {currentMoney.map(({ money }, idx) => (
+          <MoneyContext.Provider value={currentMoney[idx]} key={money}>
+            <MoneyItem />
+          </MoneyContext.Provider>
         ))}
       </ul>
       <TotalMoneyArea moneyData={currentMoney} />

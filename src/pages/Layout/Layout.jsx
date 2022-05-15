@@ -1,7 +1,12 @@
+import React from "react";
+
 import Navbar from "components/Navbar/NavBar";
+import cash from "mockData/money";
 import { Outlet } from "react-router-dom";
 
 import { Wrap, Main } from "./Layout.styled";
+
+export const MoneyContext = React.createContext(cash);
 
 const Layout = ({ menusData }) => {
   return (
@@ -11,7 +16,9 @@ const Layout = ({ menusData }) => {
       </nav>
 
       <Main>
-        <Outlet />
+        <MoneyContext.Provider value={cash}>
+          <Outlet />
+        </MoneyContext.Provider>
       </Main>
     </Wrap>
   );
