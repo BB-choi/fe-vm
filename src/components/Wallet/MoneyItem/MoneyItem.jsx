@@ -9,7 +9,7 @@ const Count = ({ data }) => {
   return <p className="count">{data}</p>;
 };
 
-const MoneyItem = () => {
+const MoneyItem = ({ onClick }) => {
   const { money, count } = useContext(MoneyContext);
 
   return (
@@ -18,6 +18,8 @@ const MoneyItem = () => {
         className="money"
         data={{ name: money }}
         styles={moneyButtonStyle}
+        isDisabled={!count}
+        onClick={onClick}
       />
       <Count data={count} />
     </MoneyLi>

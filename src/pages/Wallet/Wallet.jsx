@@ -2,23 +2,26 @@ import { useContext } from "react";
 
 import MoneyItem from "components/Wallet/MoneyItem/MoneyItem";
 import TotalMoneyArea from "components/Wallet/TotalMoneyArea/TotalMoneyArea";
-import { MoneyContext } from "pages/Layout/Layout";
+import { MoneyContext, setMoneyContext } from "pages/Layout/Layout";
 
 import Wrapper from "./Wallet.styled";
 
 const Wallet = () => {
-  const currentMoney = useContext(MoneyContext);
+  const { cashData } = useContext(MoneyContext);
+  const handleClickButton = useContext(setMoneyContext);
+
+  const walletItems = cashData.map(({ money }, idx) => {
+    return (
+      <MoneyContext.Provider value={cashData[idx]} key={money}>
+        <MoneyItem onClick={() => handleClickButton(idx)} />
+      </MoneyContext.Provider>
+    );
+  });
 
   return (
     <Wrapper>
-      <ul>
-        {currentMoney.map(({ money }, idx) => (
-          <MoneyContext.Provider value={currentMoney[idx]} key={money}>
-            <MoneyItem />
-          </MoneyContext.Provider>
-        ))}
-      </ul>
-      <TotalMoneyArea moneyData={currentMoney} />
+      <ul>{walletItems}</ul>
+      <TotalMoneyArea moneyData={cashData} />
     </Wrapper>
   );
 };
