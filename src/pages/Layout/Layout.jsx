@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import { createContext, useCallback, useMemo, useState } from "react";
 
 import Navbar from "components/Navbar/NavBar";
 import cash from "mockData/money";
@@ -6,10 +6,10 @@ import { Outlet } from "react-router-dom";
 
 import { Wrap, Main } from "./Layout.styled";
 
-export const MoneyContext = React.createContext({});
-export const setMoneyContext = React.createContext(() => {});
+export const MoneyContext = createContext({});
+export const SetMoneyContext = createContext(() => {});
 
-const Layout = ({ menusData }) => {
+const MoneyProvider = ({ children }) => {
   const [cashData, setCashData] = useState(cash);
 
   const decreaseCashCount = useCallback((money) => {
@@ -31,17 +31,23 @@ const Layout = ({ menusData }) => {
   );
 
   return (
+    <SetMoneyContext.Provider value={decreaseCashCount}>
+      <MoneyContext.Provider value={money}>{children}</MoneyContext.Provider>
+    </SetMoneyContext.Provider>
+  );
+};
+
+const Layout = ({ menusData }) => {
+  return (
     <Wrap>
       <nav className="gnb">
         <Navbar menusData={menusData} />
       </nav>
 
       <Main>
-        <setMoneyContext.Provider value={decreaseCashCount}>
-          <MoneyContext.Provider value={money}>
-            <Outlet />
-          </MoneyContext.Provider>
-        </setMoneyContext.Provider>
+        <MoneyProvider>
+          <Outlet />
+        </MoneyProvider>
       </Main>
     </Wrap>
   );
