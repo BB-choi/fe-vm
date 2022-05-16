@@ -1,11 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-import Wrapper from "./NavItem.styled";
-
-export const CLASS_NAME = {
-  ACTIVE: "current-path",
-  LINK: "link",
-};
+import Wrapper, { CLASS_NAME } from "./NavItem.styled";
 
 const getClassName = (isCurrentPath) => {
   const { ACTIVE, LINK } = CLASS_NAME;
