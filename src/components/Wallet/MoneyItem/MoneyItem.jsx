@@ -1,8 +1,7 @@
 import { memo, useContext } from "react";
 
 import Button from "components/common/form/Button/Button";
-// import { setMoneyContext } from "pages/Layout/Layout";
-import { SetMoneyContext } from "pages/Layout/Layout";
+import { SetMoneyContext } from "contexts/moneyContext";
 
 import { MoneyLi, moneyButtonStyle } from "./MoneyItem.styled";
 
