@@ -4,15 +4,19 @@ import Button from "components/common/form/Button/Button";
 import { SetMoneyContext } from "contexts/moneyContext";
 import { SetProgressContext } from "contexts/progressContext";
 import constants from "mockData/constants";
+import numberUtil from "utils/numberUtil";
 
 import { MoneyLi, moneyButtonStyle } from "./MoneyItem.styled";
+
+const { seperateThousands } = numberUtil;
+const { CURRENCY } = constants;
 
 const Count = ({ data }) => {
   return <p className="count">{data}</p>;
 };
 
 const getInsertMoneyMessage = (money) => {
-  return `${money} ${constants.CURRENCY}이 투입되었습니다.`;
+  return `${seperateThousands(money)} ${CURRENCY}이 투입되었습니다.`;
 };
 
 const MoneyItem = ({ money, count }) => {

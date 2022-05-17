@@ -12,6 +12,7 @@ const DispenseArea = () => {
   return (
     <DispenseAreaWrap>
       <InsertMoneyArea value={INITIAL_MONEY_VALUE} />
+
       <Button
         data={{
           name: RETURN,
