@@ -13,10 +13,10 @@ const Wrapper = styled.div`
   overflow-y: auto;
 `;
 
-const ProcessList = styled.ol`
+const ProgressList = styled.ol`
   li:not(:last-child) {
     margin-bottom: 0.5rem;
   }
 `;
 
-export { Wrapper, ProcessList };
+export { Wrapper, ProgressList };
