@@ -1,7 +1,20 @@
+import { useContext } from "react";
+
+import { ProcessContext } from "contexts/processContext";
+
+import ProcessItem from "./ProcessItem/ProcessItem";
 import Wrapper from "./ProgressArea.styled";
 
 const ProgressArea = () => {
-  return <Wrapper>투입되었습니다...</Wrapper>;
+  const { process } = useContext(ProcessContext);
+
+  return (
+    <Wrapper>
+      {process.map((curProcess) => (
+        <ProcessItem process={curProcess} />
+      ))}
+    </Wrapper>
+  );
 };
 
 export default ProgressArea;

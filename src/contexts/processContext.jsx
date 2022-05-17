@@ -12,7 +12,7 @@ const ProcessProvider = ({ children }) => {
     });
   }, []);
 
-  const currentProcess = useMemo(
+  const processList = useMemo(
     () => ({
       process,
     }),
@@ -21,7 +21,7 @@ const ProcessProvider = ({ children }) => {
 
   return (
     <SetProcessContext.Provider value={updateProcess}>
-      <ProcessContext.Provider value={currentProcess}>
+      <ProcessContext.Provider value={processList}>
         {children}
       </ProcessContext.Provider>
     </SetProcessContext.Provider>
