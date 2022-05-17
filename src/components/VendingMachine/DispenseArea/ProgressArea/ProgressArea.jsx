@@ -3,7 +3,7 @@ import { useContext, useEffect, useRef } from "react";
 import { ProcessContext } from "contexts/processContext";
 
 import ProcessItem from "./ProcessItem/ProcessItem";
-import Wrapper from "./ProgressArea.styled";
+import { Wrapper, ProcessList } from "./ProgressArea.styled";
 
 const createKey = (value, idx) => value + idx;
 
@@ -13,7 +13,10 @@ const ProgressArea = () => {
   const processEndRef = useRef();
 
   const scrollToBottom = () => {
-    processEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    processEndRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+    });
   };
 
   useEffect(() => {
@@ -22,10 +25,11 @@ const ProgressArea = () => {
 
   return (
     <Wrapper>
-      {process.map((curProcess, idx) => (
-        <ProcessItem process={curProcess} key={createKey(curProcess, idx)} />
-      ))}
-      <div ref={processEndRef} />
+      <ProcessList ref={processEndRef}>
+        {process.map((curProcess, idx) => (
+          <ProcessItem process={curProcess} key={createKey(curProcess, idx)} />
+        ))}
+      </ProcessList>
     </Wrapper>
   );
 };
