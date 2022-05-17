@@ -8,7 +8,7 @@ const ProcessProvider = ({ children }) => {
 
   const updateProcess = useCallback((newProcess) => {
     setProcess((prevProcess) => {
-      return [newProcess, ...prevProcess];
+      return [...prevProcess, newProcess];
     });
   }, []);
 

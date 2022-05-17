@@ -1,7 +1,7 @@
 import { memo } from "react";
 
 const ProcessItem = ({ process }) => {
-  return <p>{process}</p>;
+  return <li>{process}</li>;
 };
 
 export default memo(ProcessItem);
