@@ -6,20 +6,14 @@ import {
   SetMoneyContext,
 } from "contexts/moneyContext";
 import { SetProgressContext } from "contexts/progressContext";
-import constants from "mockData/constants";
-import numberUtil from "utils/numberUtil";
+import insertMoneyHelper from "helper/insertMoneyHelper";
 
 import { MoneyLi, moneyButtonStyle } from "./MoneyItem.styled";
 
-const { seperateThousands } = numberUtil;
-const { CURRENCY } = constants;
+const { getInsertMoneyMessage } = insertMoneyHelper;
 
 const Count = ({ data }) => {
   return <p className="count">{data}</p>;
-};
-
-const getInsertMoneyMessage = (money) => {
-  return `${seperateThousands(money)} ${CURRENCY} 투입`;
 };
 
 const MoneyItem = ({ money, count }) => {
