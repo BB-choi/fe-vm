@@ -1,4 +1,4 @@
-import constants from "mockData/constants";
+import constants from "utils/constants";
 import numberUtil from "utils/numberUtil";
 
 import { Wrapper, MoneyArea, P } from "./TotalMoneyArea.styled";

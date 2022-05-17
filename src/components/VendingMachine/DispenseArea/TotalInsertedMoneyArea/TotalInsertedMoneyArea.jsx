@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import { InsertedMoneyContext } from "contexts/moneyContext";
-import constants from "mockData/constants";
+import constants from "utils/constants";
 import numberUtil from "utils/numberUtil";
 
 import { Wrapper, TotalInsertedMoney } from "./TotalInsertedMoney.styled";
