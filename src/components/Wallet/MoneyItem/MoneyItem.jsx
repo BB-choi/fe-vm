@@ -19,7 +19,7 @@ const Count = ({ data }) => {
 };
 
 const getInsertMoneyMessage = (money) => {
-  return `${seperateThousands(money)} ${CURRENCY}이 투입되었습니다.`;
+  return `${seperateThousands(money)} ${CURRENCY} 투입`;
 };
 
 const MoneyItem = ({ money, count }) => {
