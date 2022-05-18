@@ -7,9 +7,9 @@ const productButtonStyle = css`
 
   &:hover:not([disabled]) {
     ${({ theme: { colors, fontWeights } }) => `
-    background-color: ${colors.darkblue};
+    background-color: ${colors.green};
     color: ${colors.white};
-    font-weight: ${fontWeights.mediumBold};
+    font-weight: ${fontWeights.bold};
   `}
   }
 `;
