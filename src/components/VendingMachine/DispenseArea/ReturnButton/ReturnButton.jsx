@@ -23,6 +23,7 @@ const ReturnButton = () => {
 
   const handleClickReturnButton = () => {
     const totalInsertedMoneyCount = getTotalInsertedMoney(insertedMoney);
+    console.log(totalInsertedMoneyCount, "여기가 클릭핸들러");
     resetInsertedMoney(totalInsertedMoneyCount);
     updateProgress("return", totalMoney);
   };
