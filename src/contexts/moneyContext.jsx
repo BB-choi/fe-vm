@@ -46,8 +46,6 @@ const MoneyProvider = ({ children }) => {
   const resetInsertedMoney = useCallback((moneyCount) => {
     // 아무것도 구매하지 않고 반환버튼을 누른경우 그대로 돌려주는 함수
     setCashData((prevCashData) => {
-      console.log(moneyCount, "여기서 처리함");
-
       return prevCashData.map((currentData) => {
         return moneyCount
           .filter(({ money }) => money === currentData.money)
