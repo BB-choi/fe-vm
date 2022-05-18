@@ -5,9 +5,11 @@ import constants from "utils/constants";
 
 const { DECREASE_COUNT } = constants;
 
+// 지갑 금액 Context
 export const MoneyContext = createContext({});
 export const SetMoneyContext = createContext(() => {});
 
+// 자판기 금액 Context
 export const InsertedMoneyContext = createContext({});
 export const SetInsertedMoneyContext = createContext(() => {});
 export const ResetInsertedMoneyContext = createContext(() => {});
@@ -27,7 +29,7 @@ const MoneyProvider = ({ children }) => {
     });
   }, []);
 
-  const money = useMemo(
+  const moneyData = useMemo(
     () => ({
       cashData,
     }),
@@ -41,8 +43,19 @@ const MoneyProvider = ({ children }) => {
     ]);
   }, []);
 
-  const resetInsertedMoney = useCallback(() => {
-    return setInsertedMoney([]);
+  const resetInsertedMoney = useCallback((moneyCount) => {
+    // 아무것도 구매하지 않고 반환버튼을 누른경우 그대로 돌려주는 함수
+    setCashData((prevCashData) => {
+      return prevCashData.map((currentData) => {
+        return moneyCount
+          .filter(({ money }) => money === currentData.money)
+          .reduce((prev, { count }) => {
+            return { ...prev, count: currentData.count + count };
+          }, currentData);
+      });
+    });
+
+    setInsertedMoney([]);
   }, []);
 
   const totalInsertedMoney = useMemo(
@@ -54,7 +67,7 @@ const MoneyProvider = ({ children }) => {
     <SetMoneyContext.Provider value={decreaseCashCount}>
       <SetInsertedMoneyContext.Provider value={insertMoney}>
         <ResetInsertedMoneyContext.Provider value={resetInsertedMoney}>
-          <MoneyContext.Provider value={money}>
+          <MoneyContext.Provider value={moneyData}>
             <InsertedMoneyContext.Provider value={totalInsertedMoney}>
               {children}
             </InsertedMoneyContext.Provider>

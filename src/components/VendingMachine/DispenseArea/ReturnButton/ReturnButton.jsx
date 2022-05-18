@@ -12,7 +12,7 @@ import constants from "utils/constants";
 import returnButtonStyle from "./ReturnButton.styled";
 
 const { RETURN } = constants.BUTTON_NAME;
-const { computeTotalMoney } = moneyHelper;
+const { computeTotalMoney, getTotalInsertedMoney } = moneyHelper;
 
 const ReturnButton = () => {
   const { insertedMoney } = useContext(InsertedMoneyContext);
@@ -22,8 +22,9 @@ const ReturnButton = () => {
   const totalMoney = computeTotalMoney(insertedMoney);
 
   const handleClickReturnButton = () => {
+    const totalInsertedMoneyCount = getTotalInsertedMoney(insertedMoney);
+    resetInsertedMoney(totalInsertedMoneyCount);
     updateProgress("return", totalMoney);
-    resetInsertedMoney();
   };
 
   return (
