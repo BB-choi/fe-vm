@@ -10,6 +10,7 @@ export const SetMoneyContext = createContext(() => {});
 
 export const InsertedMoneyContext = createContext({});
 export const SetInsertedMoneyContext = createContext(() => {});
+export const ResetInsertedMoneyContext = createContext(() => {});
 
 const MoneyProvider = ({ children }) => {
   const [cashData, setCashData] = useState(cash);
@@ -40,6 +41,10 @@ const MoneyProvider = ({ children }) => {
     ]);
   }, []);
 
+  const resetInsertedMoney = useCallback(() => {
+    return setInsertedMoney([]);
+  }, []);
+
   const totalInsertedMoney = useMemo(
     () => ({ insertedMoney }),
     [insertedMoney]
@@ -48,11 +53,13 @@ const MoneyProvider = ({ children }) => {
   return (
     <SetMoneyContext.Provider value={decreaseCashCount}>
       <SetInsertedMoneyContext.Provider value={insertMoney}>
-        <MoneyContext.Provider value={money}>
-          <InsertedMoneyContext.Provider value={totalInsertedMoney}>
-            {children}
-          </InsertedMoneyContext.Provider>
-        </MoneyContext.Provider>
+        <ResetInsertedMoneyContext.Provider value={resetInsertedMoney}>
+          <MoneyContext.Provider value={money}>
+            <InsertedMoneyContext.Provider value={totalInsertedMoney}>
+              {children}
+            </InsertedMoneyContext.Provider>
+          </MoneyContext.Provider>
+        </ResetInsertedMoneyContext.Provider>
       </SetInsertedMoneyContext.Provider>
     </SetMoneyContext.Provider>
   );
