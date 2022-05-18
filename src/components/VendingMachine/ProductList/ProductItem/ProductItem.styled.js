@@ -30,6 +30,11 @@ const ProductLi = styled.li`
     border: ${({ theme: { colors }, isAvailablePurchase }) =>
       isAvailablePurchase && `3px solid ${colors.green}`};
   }
+
+  p {
+    color: ${({ theme: { colors }, isInStock }) =>
+      !isInStock && `${colors.red}`};
+  }
 `;
 
 export { productButtonStyle, ProductLi };
