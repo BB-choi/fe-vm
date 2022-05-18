@@ -13,7 +13,7 @@ const inputStyle = css`
   font-size: ${({ theme: { fontSizes } }) => fontSizes.extraLarge};
 `;
 
-const Wrapper = styled.div`
+const Form = styled.form`
   font-size: ${({ theme: { fontSizes } }) => fontSizes.normal};
   display: flex;
   justify-content: space-between;
@@ -24,4 +24,4 @@ const Wrapper = styled.div`
   }
 `;
 
-export { Wrapper, insertButtonStyle, inputStyle };
+export { Form, insertButtonStyle, inputStyle };
