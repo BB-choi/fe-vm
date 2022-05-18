@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import StyledInput from "./Input.styled";
 
-const Input = ({ type, value, style }) => {
+const Input = ({ type, value, styles }) => {
   const [inputValue, setInputValue] = useState(value);
 
   const handleInputChange = ({ target }) => {
@@ -14,7 +14,7 @@ const Input = ({ type, value, style }) => {
       type={type}
       value={inputValue}
       onChange={handleInputChange}
-      style={style}
+      styles={styles}
     />
   );
 };
