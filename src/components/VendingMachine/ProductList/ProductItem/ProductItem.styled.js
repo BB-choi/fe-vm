@@ -26,6 +26,11 @@ const ProductLi = styled.li`
     font-weight: ${({ theme: { fontWeights } }) => fontWeights.mediumBold};
   }
 
+  button[disabled] {
+    background-color: ${({ theme: { colors }, isInStock }) =>
+      isInStock && `${colors.white}`};
+  }
+
   button:not([disabled]) {
     border: ${({ theme: { colors }, isAvailablePurchase }) =>
       isAvailablePurchase && `3px solid ${colors.green}`};
