@@ -5,11 +5,11 @@ import { productButtonStyle, ProductLi } from "./ProductItem.styled";
 
 const { SOLDOUT_MESSAGE } = constants;
 
-const ProductItem = ({ productData }) => {
+const ProductItem = ({ productData, currentMoney }) => {
   const { name, isInStock, price } = productData;
 
   return (
-    <ProductLi>
+    <ProductLi isAvailablePurchase={currentMoney >= price}>
       <Button
         data={{ name }}
         styles={productButtonStyle}

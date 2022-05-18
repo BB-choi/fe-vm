@@ -25,6 +25,11 @@ const ProductLi = styled.li`
     text-align: center;
     font-weight: ${({ theme: { fontWeights } }) => fontWeights.mediumBold};
   }
+
+  button:not([disabled]) {
+    border: ${({ theme: { colors }, isAvailablePurchase }) =>
+      isAvailablePurchase && `3px solid ${colors.green}`};
+  }
 `;
 
 export { productButtonStyle, ProductLi };
