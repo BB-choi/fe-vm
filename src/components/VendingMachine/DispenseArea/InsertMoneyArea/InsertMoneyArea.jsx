@@ -54,13 +54,21 @@ const InsertMoneyArea = () => {
   const updateProgress = useContext(SetProgressContext);
   const { insertTotalMoney, insertMoney } = useContext(MoneyActionsContext);
   const { cashData } = useContext(MoneyContext);
+  const {
+    hasNoMoney,
+    overBaseMoney,
+    insertSimilarMoney,
+    insertExactMoney,
+    underMinLength,
+    overMaxLength,
+    notValidLastIndex,
+  } = alertMessages;
 
   const inputRef = useRef(null);
 
   const focusInput = () => inputRef.current.focus();
 
   const isValidInput = (inputValue) => {
-    const { underMinLength, overMaxLength, notValidLastIndex } = alertMessages;
     if (isInputUnderMinLength(inputValue)) {
       setMessage(underMinLength);
       return false;
@@ -79,21 +87,9 @@ const InsertMoneyArea = () => {
     return true;
   };
 
-  const isOverBaseMoney = (inputNumber, totalMoney) => {
-    const { hasNoMoney, overBaseMoney } = alertMessages;
-
-    if (!totalMoney) {
-      setMessage(hasNoMoney);
-      return false;
-    }
-
-    if (!isWithinBaseMoney(inputNumber, totalMoney)) {
-      setMessage(overBaseMoney);
-      insertTotalMoney(cashData);
-      updateProgress("insert", totalMoney);
-      return false;
-    }
-    return true;
+  const hasMoney = (totalMoney) => {
+    setMessage(hasNoMoney);
+    return totalMoney > 0;
   };
 
   const handleFormSubmit = (e) => {
@@ -107,11 +103,17 @@ const InsertMoneyArea = () => {
 
     let inputNumber = Number(inputValue);
     const totalMoney = computeTotalMoney(cashData);
-    if (!isOverBaseMoney(inputNumber, totalMoney)) {
+
+    if (!hasMoney(totalMoney)) {
       return;
     }
 
-    const { insertSimilarMoney, insertExactMoney } = alertMessages;
+    if (!isWithinBaseMoney(inputNumber, totalMoney)) {
+      setMessage(overBaseMoney);
+      insertTotalMoney(cashData);
+      updateProgress("insert", totalMoney);
+      return;
+    }
 
     // 높은 금액부터 확인 후
     MONEY_ARR_DESC_ORDER.forEach((unit) => {
