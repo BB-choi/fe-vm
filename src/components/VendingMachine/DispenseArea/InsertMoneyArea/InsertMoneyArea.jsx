@@ -92,6 +92,56 @@ const InsertMoneyArea = () => {
     return totalMoney > 0;
   };
 
+  const insertMoneyDescOrder = (inputNumber) => {
+    let inputMoney = inputNumber;
+
+    MONEY_ARR_DESC_ORDER.forEach((unit) => {
+      const [{ money, count }] = cashData.filter(
+        (current) => current.money === unit
+      );
+
+      if (inputMoney < 0 || money > inputMoney) {
+        return;
+      }
+
+      let moneyCount = count;
+      if (!(inputMoney % money)) {
+        while (inputMoney && moneyCount) {
+          insertMoney(money);
+          inputMoney -= money;
+          moneyCount -= DECREASE_COUNT;
+          updateProgress("insert", money);
+        }
+        return;
+      }
+
+      if (inputMoney > 0 && moneyCount) {
+        insertMoney(money);
+        inputMoney -= money;
+        moneyCount -= DECREASE_COUNT;
+        updateProgress("insert", money);
+      }
+    });
+
+    return inputMoney;
+  };
+
+  const insertMoneyAscOrder = (inputNumber) => {
+    let inputMoney = inputNumber;
+    for (let i = 0; i < cashData.length; i += 1) {
+      const { money, count } = cashData[i];
+      if (count) {
+        insertMoney(money);
+        inputMoney -= money;
+        updateProgress("insert", money);
+      }
+
+      if (inputMoney < 0) {
+        break;
+      }
+    }
+  };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
@@ -115,54 +165,16 @@ const InsertMoneyArea = () => {
       return;
     }
 
-    // 높은 금액부터 확인 후
-    MONEY_ARR_DESC_ORDER.forEach((unit) => {
-      const [{ money, count }] = cashData.filter(
-        (current) => current.money === unit
-      );
-
-      if (inputNumber < 0 || money > inputNumber) {
-        return;
-      }
-
-      let moneyCount = count;
-      if (!(inputNumber % money)) {
-        while (inputNumber && moneyCount) {
-          insertMoney(money);
-          inputNumber -= money;
-          moneyCount -= DECREASE_COUNT;
-          updateProgress("insert", money);
-        }
-        return;
-      }
-
-      if (inputNumber > 0 && moneyCount) {
-        insertMoney(money);
-        inputNumber -= money;
-        moneyCount -= DECREASE_COUNT;
-        updateProgress("insert", money);
-      }
-    });
-
+    // 높은 금액부터 확인하며 투입
+    inputNumber = insertMoneyDescOrder(inputNumber);
+    // 전부 투입된 경우 (inputNumber가 0만 남음)
     if (!inputNumber) {
       setMessage(insertExactMoney);
       return;
     }
 
-    // 여전히 inputNumber가 있으면 작은 금액부터 확인해서 다시 넣어줌
-    for (let i = 0; i < cashData.length; i += 1) {
-      const { money, count } = cashData[i];
-      if (count) {
-        insertMoney(money);
-        inputNumber -= money;
-        updateProgress("insert", money);
-      }
-
-      if (inputNumber < 0) {
-        break;
-      }
-    }
-
+    // 여전히 inputNumber가 남아있으면 작은 금액부터 확인해서 다시 투입
+    insertMoneyAscOrder(inputNumber);
     setMessage(insertSimilarMoney);
   };
 
