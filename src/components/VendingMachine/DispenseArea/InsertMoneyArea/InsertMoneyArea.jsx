@@ -16,6 +16,8 @@ import {
 
 const {
   CURRENCY,
+  MONEY_ARR_DESC_ORDER,
+  INITIAL_MONEY,
   BUTTON_NAME: { INSERT },
 } = constants;
 const { isWithinBaseMoney, computeTotalMoney } = moneyHelper;
@@ -43,7 +45,7 @@ const alertMessages = {
   overBaseMoney: "소지금 초과. 최대 금액이 투입됩니다.",
 };
 
-const InsertMoneyArea = ({ value }) => {
+const InsertMoneyArea = () => {
   const [message, setMessage] = useState(alertMessages.initialMessage);
 
   const updateProgress = useContext(SetProgressContext);
@@ -99,7 +101,7 @@ const InsertMoneyArea = ({ value }) => {
       return;
     }
 
-    console.log("나머지 부분");
+    console.log(cashData, MONEY_ARR_DESC_ORDER);
   };
 
   return (
@@ -108,7 +110,7 @@ const InsertMoneyArea = ({ value }) => {
         <div className="input-wrap">
           <Input
             type="number"
-            value={value}
+            placeholder={INITIAL_MONEY}
             styles={inputStyle}
             ref={inputRef}
           />
