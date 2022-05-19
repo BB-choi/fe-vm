@@ -20,14 +20,14 @@ const MoneyProvider = ({ children }) => {
 
   const decreaseCashCount = useCallback(
     (money, decreaseCount = DECREASE_COUNT) => {
-      setCashData((prevCashData) => {
-        return prevCashData.map((current) => {
+      setCashData((prevCashData) =>
+        prevCashData.map((current) => {
           if (current.money === money) {
             return { ...current, count: current.count - decreaseCount };
           }
           return current;
-        });
-      });
+        })
+      );
     },
     []
   );
@@ -39,17 +39,17 @@ const MoneyProvider = ({ children }) => {
     [cashData]
   );
 
-  const insertMoney = (currentMoney) => {
-    return setInsertedMoney((prevInsertedMoney) => [
+  const insertMoney = (currentMoney) =>
+    setInsertedMoney((prevInsertedMoney) => [
       ...prevInsertedMoney,
       { money: currentMoney, count: DECREASE_COUNT },
     ]);
-  };
 
   const insertTotalMoney = (currentCashData) => {
-    const restCashDatas = currentCashData.reduce((prev, current) => {
-      return [...prev, { ...current }];
-    }, []);
+    const restCashDatas = currentCashData.reduce(
+      (prev, current) => [...prev, { ...current }],
+      []
+    );
 
     return setInsertedMoney((prevInsertedMoney) => [
       ...prevInsertedMoney,
@@ -67,15 +67,16 @@ const MoneyProvider = ({ children }) => {
 
   const resetInsertedMoney = useCallback((moneyCount) => {
     // 아무것도 구매하지 않고 반환버튼을 누른경우 그대로 돌려주는 함수
-    setCashData((prevCashData) => {
-      return prevCashData.map((currentData) => {
-        return moneyCount
+    setCashData((prevCashData) =>
+      prevCashData.map((currentData) =>
+        moneyCount
           .filter(({ money }) => money === currentData.money)
-          .reduce((prev, { count }) => {
-            return { ...prev, count: prev.count + count };
-          }, currentData);
-      });
-    });
+          .reduce(
+            (prev, { count }) => ({ ...prev, count: prev.count + count }),
+            currentData
+          )
+      )
+    );
 
     setInsertedMoney([]);
   }, []);
