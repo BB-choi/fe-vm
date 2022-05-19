@@ -1,6 +1,7 @@
 import { useContext } from "react";
 
 import Button from "components/common/form/Button/Button";
+import { MoneyActionsContext } from "contexts/moneyContext";
 import { SetProgressContext } from "contexts/progressContext";
 import constants from "utils/constants";
 
@@ -13,8 +14,10 @@ const ProductItem = ({ productData, currentMoney }) => {
   const isAvailablePurchase = currentMoney >= price;
 
   const updateProgress = useContext(SetProgressContext);
+  const { spendInsertedMoney } = useContext(MoneyActionsContext);
 
   const handleProductButtonClick = () => {
+    spendInsertedMoney(price);
     updateProgress("purchase", price, name);
   };
 

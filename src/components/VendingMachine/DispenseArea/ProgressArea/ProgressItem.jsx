@@ -16,7 +16,7 @@ const getProgressString = ({ type, money, product }) => {
       return `${product} 구입 (${currentMoney} 사용)`;
     case "return":
       return `${
-        product ? `${product}가 배출되었습니다.\n잔돈` : "투입 금액"
+        product ? `${product} 배출\n잔돈` : "투입 금액"
       } ${currentMoney} 반환`;
     default:
       return "";
