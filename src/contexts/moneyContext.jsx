@@ -68,7 +68,7 @@ const MoneyProvider = ({ children }) => {
       const totalMoney = computeTotalMoney(prevInsertedMoney);
       let restInsertedMoney = totalMoney - productPrice;
 
-      return MONEY_ARR_DESC_ORDER.map((currentMoney) => {
+      const newInsertedMoney = MONEY_ARR_DESC_ORDER.map((currentMoney) => {
         let moneyCount = INITIAL_COUNT;
 
         if (!restInsertedMoney || restInsertedMoney < currentMoney) {
@@ -83,15 +83,15 @@ const MoneyProvider = ({ children }) => {
           return { money: currentMoney, count: moneyCount };
         }
 
-        while (restInsertedMoney >= currentMoney) {
+        while (restInsertedMoney > currentMoney) {
           moneyCount += INCREASE_COUNT;
           restInsertedMoney -= currentMoney;
         }
         return { money: currentMoney, count: moneyCount };
       });
-    });
 
-    decreaseCashCount(productPrice);
+      return newInsertedMoney;
+    });
   };
 
   const moneyData = useMemo(
