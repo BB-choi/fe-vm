@@ -8,22 +8,16 @@ const { seperateThousands } = numberUtil;
 
 const getProgressString = ({ type, money, product }) => {
   const currentMoney = `${seperateThousands(money)}${CURRENCY}`;
-  let progressString = "";
 
   switch (type) {
     case "insert":
       return `${currentMoney} 투입`;
     case "purchase":
-      progressString += `${product} 구입 (${currentMoney} 사용)`;
-    // eslint-disable-next-line no-fallthrough
+      return `${product} 구입 (${currentMoney} 사용)`;
     case "return":
-      progressString += "\n";
-      progressString += `${
-        product ? "잔돈" : "투입 금액"
-      } ${currentMoney} 반환`;
-      return progressString;
+      return `${product ? "잔돈" : "투입 금액"} ${currentMoney} 반환`;
     default:
-      return progressString;
+      return "";
   }
 };
 

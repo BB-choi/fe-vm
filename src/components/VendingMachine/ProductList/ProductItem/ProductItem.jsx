@@ -1,4 +1,7 @@
+import { useContext } from "react";
+
 import Button from "components/common/form/Button/Button";
+import { SetProgressContext } from "contexts/progressContext";
 import constants from "utils/constants";
 
 import { productButtonStyle, ProductLi } from "./ProductItem.styled";
@@ -9,6 +12,12 @@ const ProductItem = ({ productData, currentMoney }) => {
   const { name, isInStock, price } = productData;
   const isAvailablePurchase = currentMoney >= price;
 
+  const updateProgress = useContext(SetProgressContext);
+
+  const handleProductButtonClick = () => {
+    updateProgress("purchase", price, name);
+  };
+
   return (
     <ProductLi isAvailablePurchase={isAvailablePurchase} isInStock={isInStock}>
       <Button
@@ -16,6 +25,7 @@ const ProductItem = ({ productData, currentMoney }) => {
         styles={productButtonStyle}
         className="product-button"
         isClickable={isInStock && isAvailablePurchase}
+        onClick={handleProductButtonClick}
       />
       <p className="product-price">{(isInStock && price) || SOLDOUT_MESSAGE}</p>
     </ProductLi>
