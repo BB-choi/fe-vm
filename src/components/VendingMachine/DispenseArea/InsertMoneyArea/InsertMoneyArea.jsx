@@ -58,10 +58,11 @@ const InsertMoneyArea = ({ value }) => {
 
     const inputNumber = Number(inputRef.current.value);
     const totalMoney = computeTotalMoney(cashData);
+
     if (!isWithinBaseMoney(inputNumber, totalMoney)) {
       setMessage(alertMessages.overBaseMoney);
-      insertTotalMoney();
       cashData.forEach(({ money, count }) => decreaseCashCount(money, count));
+      insertTotalMoney();
       updateProgress("insert", totalMoney);
     }
   };

@@ -46,14 +46,14 @@ const MoneyProvider = ({ children }) => {
     ]);
   };
 
-  const insertTotalMoney = () => {
-    const cashDatas = cashData.reduce((prev, current) => {
+  const insertTotalMoney = (currentCashData) => {
+    const restCashDatas = currentCashData.reduce((prev, current) => {
       return [...prev, { ...current }];
     }, []);
 
     return setInsertedMoney((prevInsertedMoney) => [
       ...prevInsertedMoney,
-      ...cashDatas,
+      ...restCashDatas,
     ]);
   };
 
