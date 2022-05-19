@@ -44,6 +44,8 @@ const alertMessages = {
   overMaxLength: "만 단위까지만 입력 가능합니다.",
   overBaseMoney: "소지금 초과. 최대 금액이 투입됩니다.",
   hasNoMoney: "소지한 금액이 없습니다.",
+  insertSimilarMoney: "입력금액과 가까운 금액이 투입됩니다.",
+  insertExactMoney: "입력금액을 투입합니다.",
 };
 
 const InsertMoneyArea = () => {
@@ -109,6 +111,8 @@ const InsertMoneyArea = () => {
       return;
     }
 
+    const { insertSimilarMoney, insertExactMoney } = alertMessages;
+
     // 높은 금액부터 확인 후
     MONEY_ARR_DESC_ORDER.forEach((unit) => {
       const [{ money, count }] = cashData.filter(
@@ -138,21 +142,26 @@ const InsertMoneyArea = () => {
       }
     });
 
-    // 여전히 inputNumber가 있으면 작은 금액부터 확인해서 다시 넣어줌
-    if (inputNumber) {
-      for (let i = 0; i < cashData.length; i += 1) {
-        const { money, count } = cashData[i];
-        if (count) {
-          insertMoney(money);
-          inputNumber -= money;
-          updateProgress("insert", money);
-        }
+    if (!inputNumber) {
+      setMessage(insertExactMoney);
+      return;
+    }
 
-        if (inputNumber < 0) {
-          break;
-        }
+    // 여전히 inputNumber가 있으면 작은 금액부터 확인해서 다시 넣어줌
+    for (let i = 0; i < cashData.length; i += 1) {
+      const { money, count } = cashData[i];
+      if (count) {
+        insertMoney(money);
+        inputNumber -= money;
+        updateProgress("insert", money);
+      }
+
+      if (inputNumber < 0) {
+        break;
       }
     }
+
+    setMessage(insertSimilarMoney);
   };
 
   return (
