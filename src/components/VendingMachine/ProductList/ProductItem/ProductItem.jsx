@@ -17,8 +17,11 @@ const ProductItem = ({ productData, currentMoney }) => {
   const { spendInsertedMoney } = useContext(MoneyActionsContext);
 
   const handleProductButtonClick = () => {
-    spendInsertedMoney(price);
     updateProgress("purchase", price, name);
+    // 2초 후 금액 소비
+    spendInsertedMoney(price);
+    // 2초후 잔액반환
+    // 2초후 updateProgress
   };
 
   return (

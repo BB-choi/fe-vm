@@ -20,7 +20,31 @@ const {
   INITIAL_MONEY,
   DECREASE_COUNT,
   BUTTON_NAME: { INSERT },
+  DELAY_MS,
 } = constants;
+
+const alertMessages = {
+  initialMessage: "투입할 금액을 입력하세요.",
+  underMinLength: "두 자리 이상 입력하세요.",
+  notValidLastIndex: "일의 자리가 유효하지 않습니다.",
+  overMaxLength: "만 단위까지만 입력 가능합니다.",
+  overBaseMoney: "소지금 초과. 최대 금액이 투입됩니다.",
+  hasNoMoney: "소지한 금액이 없습니다.",
+  insertSimilarMoney: "입력금액과 가까운 금액이 투입됩니다.",
+  insertExactMoney: "입력금액을 투입합니다.",
+};
+
+const {
+  hasNoMoney,
+  overBaseMoney,
+  insertSimilarMoney,
+  insertExactMoney,
+  underMinLength,
+  overMaxLength,
+  notValidLastIndex,
+  initialMessage,
+} = alertMessages;
+
 const { isWithinBaseMoney, computeTotalMoney } = moneyHelper;
 const MAX_INPUT_LENGTH = 5;
 const MIN_INPUT_LENGTH = 2;
@@ -37,32 +61,20 @@ const isLastIndexZero = (input) => {
   return input[input.length - 1] === "0";
 };
 
-const alertMessages = {
-  initialMessage: "투입할 금액을 입력하세요.",
-  underMinLength: "두 자리 이상 입력하세요.",
-  notValidLastIndex: "일의 자리가 유효하지 않습니다.",
-  overMaxLength: "만 단위까지만 입력 가능합니다.",
-  overBaseMoney: "소지금 초과. 최대 금액이 투입됩니다.",
-  hasNoMoney: "소지한 금액이 없습니다.",
-  insertSimilarMoney: "입력금액과 가까운 금액이 투입됩니다.",
-  insertExactMoney: "입력금액을 투입합니다.",
-};
-
 const InsertMoneyArea = () => {
-  const [message, setMessage] = useState(alertMessages.initialMessage);
+  const [message, setMessage] = useState(initialMessage);
+
+  const showMessage = (selectedMessage) => {
+    setMessage(selectedMessage);
+
+    setTimeout(() => {
+      setMessage(initialMessage);
+    }, DELAY_MS);
+  };
 
   const updateProgress = useContext(SetProgressContext);
   const { insertTotalMoney, insertMoney } = useContext(MoneyActionsContext);
   const { cashData } = useContext(MoneyContext);
-  const {
-    hasNoMoney,
-    overBaseMoney,
-    insertSimilarMoney,
-    insertExactMoney,
-    underMinLength,
-    overMaxLength,
-    notValidLastIndex,
-  } = alertMessages;
 
   const inputRef = useRef(null);
 
@@ -72,17 +84,17 @@ const InsertMoneyArea = () => {
 
   const isValidInput = (inputValue) => {
     if (isInputUnderMinLength(inputValue)) {
-      setMessage(underMinLength);
+      showMessage(underMinLength);
       return false;
     }
 
     if (!isLastIndexZero(inputValue)) {
-      setMessage(notValidLastIndex);
+      showMessage(notValidLastIndex);
       return false;
     }
 
     if (isInputOverMaxLength(inputValue)) {
-      setMessage(overMaxLength);
+      showMessage(overMaxLength);
       return false;
     }
 
@@ -90,7 +102,7 @@ const InsertMoneyArea = () => {
   };
 
   const hasMoney = (totalMoney) => {
-    setMessage(hasNoMoney);
+    showMessage(hasNoMoney);
     return totalMoney > 0;
   };
 
@@ -161,7 +173,7 @@ const InsertMoneyArea = () => {
     }
 
     if (!isWithinBaseMoney(inputNumber, totalMoney)) {
-      setMessage(overBaseMoney);
+      showMessage(overBaseMoney);
       insertTotalMoney(cashData);
       updateProgress("insert", totalMoney);
       return;
@@ -171,13 +183,13 @@ const InsertMoneyArea = () => {
     inputNumber = insertMoneyDescOrder(inputNumber);
     // 전부 투입된 경우 (inputNumber가 0만 남음)
     if (!inputNumber) {
-      setMessage(insertExactMoney);
+      showMessage(insertExactMoney);
       return;
     }
 
     // 여전히 inputNumber가 남아있으면 작은 금액부터 확인해서 다시 투입
     insertMoneyAscOrder(inputNumber);
-    setMessage(insertSimilarMoney);
+    showMessage(insertSimilarMoney);
   };
 
   return (

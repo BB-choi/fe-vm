@@ -12,6 +12,7 @@ const constants = {
   MONEY_ARR_DESC_ORDER: [10000, 5000, 1000, 500, 100, 50, 10],
   INITIAL_MONEY: 0,
   INITIAL_COUNT: 0,
+  DELAY_MS: 2000,
 };
 
 export default constants;
