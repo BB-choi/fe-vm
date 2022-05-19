@@ -18,10 +18,10 @@ const {
   CURRENCY,
   MONEY_ARR_DESC_ORDER,
   INITIAL_MONEY,
+  DECREASE_COUNT,
   BUTTON_NAME: { INSERT },
 } = constants;
 const { isWithinBaseMoney, computeTotalMoney } = moneyHelper;
-
 const MAX_INPUT_LENGTH = 5;
 const MIN_INPUT_LENGTH = 2;
 
@@ -40,16 +40,17 @@ const isLastIndexZero = (input) => {
 const alertMessages = {
   initialMessage: "투입할 금액을 입력하세요.",
   underMinLength: "두 자리 이상 입력하세요.",
-  notValidLastIndex: "십 원 단위부터 입력 가능합니다.",
+  notValidLastIndex: "일의 자리가 유효하지 않습니다.",
   overMaxLength: "만 단위까지만 입력 가능합니다.",
   overBaseMoney: "소지금 초과. 최대 금액이 투입됩니다.",
+  hasNoMoney: "소지한 금액이 없습니다.",
 };
 
 const InsertMoneyArea = () => {
   const [message, setMessage] = useState(alertMessages.initialMessage);
 
   const updateProgress = useContext(SetProgressContext);
-  const { insertTotalMoney } = useContext(MoneyActionsContext);
+  const { insertTotalMoney, insertMoney } = useContext(MoneyActionsContext);
   const { cashData } = useContext(MoneyContext);
 
   const inputRef = useRef(null);
@@ -58,13 +59,13 @@ const InsertMoneyArea = () => {
 
   const isValidInput = (inputValue) => {
     const { underMinLength, overMaxLength, notValidLastIndex } = alertMessages;
-    if (!isLastIndexZero(inputValue)) {
-      setMessage(notValidLastIndex);
+    if (isInputUnderMinLength(inputValue)) {
+      setMessage(underMinLength);
       return false;
     }
 
-    if (isInputUnderMinLength(inputValue)) {
-      setMessage(underMinLength);
+    if (!isLastIndexZero(inputValue)) {
+      setMessage(notValidLastIndex);
       return false;
     }
 
@@ -77,8 +78,15 @@ const InsertMoneyArea = () => {
   };
 
   const isOverBaseMoney = (inputNumber, totalMoney) => {
+    const { hasNoMoney, overBaseMoney } = alertMessages;
+
+    if (!totalMoney) {
+      setMessage(hasNoMoney);
+      return false;
+    }
+
     if (!isWithinBaseMoney(inputNumber, totalMoney)) {
-      setMessage(alertMessages.overBaseMoney);
+      setMessage(overBaseMoney);
       insertTotalMoney(cashData);
       updateProgress("insert", totalMoney);
       return false;
@@ -95,13 +103,37 @@ const InsertMoneyArea = () => {
       return;
     }
 
-    const inputNumber = Number(inputValue);
+    let inputNumber = Number(inputValue);
     const totalMoney = computeTotalMoney(cashData);
     if (!isOverBaseMoney(inputNumber, totalMoney)) {
       return;
     }
 
-    console.log(cashData, MONEY_ARR_DESC_ORDER);
+    MONEY_ARR_DESC_ORDER.forEach((unit) => {
+      const [{ money, count }] = cashData.filter(
+        (current) => current.money === unit
+      );
+      if (!inputNumber || money > inputNumber) {
+        return;
+      }
+
+      if (!(inputNumber % money)) {
+        let moneyCount = count;
+        while (inputNumber && moneyCount) {
+          insertMoney(money);
+          inputNumber -= money;
+          moneyCount -= DECREASE_COUNT;
+          updateProgress("insert", money);
+        }
+        return;
+      }
+
+      while (inputNumber > money) {
+        insertMoney(money);
+        inputNumber -= money;
+        updateProgress("insert", money);
+      }
+    });
   };
 
   return (
