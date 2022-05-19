@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import Button from "components/common/form/Button/Button";
 import Input from "components/common/form/Input/Input";
@@ -89,6 +89,10 @@ const InsertMoneyArea = () => {
   const focusInput = () => {
     inputRef.current.focus();
   };
+
+  useEffect(() => {
+    focusInput();
+  });
 
   const isValidInput = (currentInputValue) => {
     if (isInputUnderMinLength(currentInputValue)) {
