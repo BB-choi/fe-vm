@@ -48,6 +48,7 @@ const {
 const { isWithinBaseMoney, computeTotalMoney } = moneyHelper;
 const MAX_INPUT_LENGTH = 5;
 const MIN_INPUT_LENGTH = 2;
+const INITIAL_INPUT_VALUE = "";
 
 const isInputOverMaxLength = (input) => {
   return input.length > MAX_INPUT_LENGTH;
@@ -63,6 +64,13 @@ const isLastIndexZero = (input) => {
 
 const InsertMoneyArea = () => {
   const [message, setMessage] = useState(initialMessage);
+  const [inputValue, setInputValue] = useState(INITIAL_INPUT_VALUE);
+
+  const updateProgress = useContext(SetProgressContext);
+  const { insertTotalMoney, insertMoney } = useContext(MoneyActionsContext);
+  const { cashData } = useContext(MoneyContext);
+
+  const inputRef = useRef(null);
 
   const showMessage = (selectedMessage) => {
     setMessage(selectedMessage);
@@ -72,28 +80,28 @@ const InsertMoneyArea = () => {
     }, DELAY_MS);
   };
 
-  const updateProgress = useContext(SetProgressContext);
-  const { insertTotalMoney, insertMoney } = useContext(MoneyActionsContext);
-  const { cashData } = useContext(MoneyContext);
-
-  const inputRef = useRef(null);
+  const resetInputValue = () => {
+    setTimeout(() => {
+      setInputValue(INITIAL_INPUT_VALUE);
+    }, DELAY_MS);
+  };
 
   const focusInput = () => {
     inputRef.current.focus();
   };
 
-  const isValidInput = (inputValue) => {
-    if (isInputUnderMinLength(inputValue)) {
+  const isValidInput = (currentInputValue) => {
+    if (isInputUnderMinLength(currentInputValue)) {
       showMessage(underMinLength);
       return false;
     }
 
-    if (!isLastIndexZero(inputValue)) {
+    if (!isLastIndexZero(currentInputValue)) {
       showMessage(notValidLastIndex);
       return false;
     }
 
-    if (isInputOverMaxLength(inputValue)) {
+    if (isInputOverMaxLength(currentInputValue)) {
       showMessage(overMaxLength);
       return false;
     }
@@ -159,13 +167,13 @@ const InsertMoneyArea = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    const inputValue = inputRef.current.value;
-    if (!isValidInput(inputValue)) {
+    const currentInputValue = inputRef.current.value;
+    if (!isValidInput(currentInputValue)) {
       focusInput();
       return;
     }
 
-    let inputNumber = Number(inputValue);
+    let inputNumber = Number(currentInputValue);
     const totalMoney = computeTotalMoney(cashData);
 
     if (!hasMoney(totalMoney)) {
@@ -184,12 +192,14 @@ const InsertMoneyArea = () => {
     // 전부 투입된 경우 (inputNumber가 0만 남음)
     if (!inputNumber) {
       showMessage(insertExactMoney);
+      resetInputValue();
       return;
     }
 
     // 여전히 inputNumber가 남아있으면 작은 금액부터 확인해서 다시 투입
     insertMoneyAscOrder(inputNumber);
     showMessage(insertSimilarMoney);
+    resetInputValue();
   };
 
   return (
@@ -201,6 +211,7 @@ const InsertMoneyArea = () => {
             placeholder={INITIAL_MONEY}
             styles={inputStyle}
             ref={inputRef}
+            stateData={{ inputValue, setInputValue }}
           />
           {CURRENCY}
         </div>
