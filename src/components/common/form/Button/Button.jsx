@@ -4,7 +4,7 @@ const Button = ({
   data,
   styles,
   className,
-  isAvailableClick,
+  isAvailableClick = true,
   onClick,
   type,
 }) => {
