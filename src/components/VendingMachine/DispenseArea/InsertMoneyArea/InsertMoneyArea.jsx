@@ -49,29 +49,48 @@ const InsertMoneyArea = ({ value }) => {
 
   const focusInput = () => inputRef.current.focus();
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    const inputValue = inputRef.current.value;
+  const isValidInput = (inputValue) => {
     if (isInputUnderMinLength(inputValue)) {
       setMessage(alertMessages.underMinLength);
       focusInput();
-      return;
+      return false;
     }
 
     if (isInputOverMaxLength(inputValue)) {
       setMessage(alertMessages.overMaxLength);
       focusInput();
+      return false;
+    }
+
+    return true;
+  };
+
+  const isOverBaseMoney = (inputNumber, totalMoney) => {
+    if (!isWithinBaseMoney(inputNumber, totalMoney)) {
+      setMessage(alertMessages.overBaseMoney);
+      insertTotalMoney(cashData);
+      updateProgress("insert", totalMoney);
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    const inputValue = inputRef.current.value;
+    if (!isValidInput(inputValue)) {
       return;
     }
 
     const inputNumber = Number(inputValue);
     const totalMoney = computeTotalMoney(cashData);
-
-    if (!isWithinBaseMoney(inputNumber, totalMoney)) {
-      setMessage(alertMessages.overBaseMoney);
-      insertTotalMoney(cashData);
-      updateProgress("insert", totalMoney);
+    if (!isOverBaseMoney(inputNumber, totalMoney)) {
+      return;
     }
+
+    console.log("여기까지 오나?");
   };
 
   return (
