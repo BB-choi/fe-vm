@@ -31,10 +31,15 @@ const isInputUnderMinLength = (input) => {
   return input.length < MIN_INPUT_LENGTH;
 };
 
+const isLastIndexZero = (input) => {
+  return input[input.length - 1] === "0";
+};
+
 const alertMessages = {
   initialMessage: "투입할 금액을 입력하세요.",
   underMinLength: "두 자리 이상 입력하세요.",
-  overMaxLength: "만 단위까지만 입력가능합니다.",
+  notValidLastIndex: "십 원 단위부터 입력 가능합니다.",
+  overMaxLength: "만 단위까지만 입력 가능합니다.",
   overBaseMoney: "소지금 초과. 최대 금액이 투입됩니다.",
 };
 
@@ -50,15 +55,19 @@ const InsertMoneyArea = ({ value }) => {
   const focusInput = () => inputRef.current.focus();
 
   const isValidInput = (inputValue) => {
+    const { underMinLength, overMaxLength, notValidLastIndex } = alertMessages;
+    if (!isLastIndexZero(inputValue)) {
+      setMessage(notValidLastIndex);
+      return false;
+    }
+
     if (isInputUnderMinLength(inputValue)) {
-      setMessage(alertMessages.underMinLength);
-      focusInput();
+      setMessage(underMinLength);
       return false;
     }
 
     if (isInputOverMaxLength(inputValue)) {
-      setMessage(alertMessages.overMaxLength);
-      focusInput();
+      setMessage(overMaxLength);
       return false;
     }
 
@@ -72,7 +81,6 @@ const InsertMoneyArea = ({ value }) => {
       updateProgress("insert", totalMoney);
       return false;
     }
-
     return true;
   };
 
@@ -81,6 +89,7 @@ const InsertMoneyArea = ({ value }) => {
 
     const inputValue = inputRef.current.value;
     if (!isValidInput(inputValue)) {
+      focusInput();
       return;
     }
 
@@ -90,7 +99,7 @@ const InsertMoneyArea = ({ value }) => {
       return;
     }
 
-    console.log("여기까지 오나?");
+    console.log("나머지 부분");
   };
 
   return (
