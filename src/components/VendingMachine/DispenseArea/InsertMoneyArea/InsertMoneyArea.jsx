@@ -69,7 +69,7 @@ const InsertMoneyArea = ({ value }) => {
 
     if (!isWithinBaseMoney(inputNumber, totalMoney)) {
       setMessage(alertMessages.overBaseMoney);
-      insertTotalMoney();
+      insertTotalMoney(cashData);
       updateProgress("insert", totalMoney);
     }
   };
