@@ -36,12 +36,31 @@ const MoneyProvider = ({ children }) => {
     [cashData]
   );
 
-  const insertMoney = useCallback((currentMoney) => {
+  const insertMoney = (currentMoney) => {
     return setInsertedMoney((prevInsertedMoney) => [
       ...prevInsertedMoney,
       { money: currentMoney, count: DECREASE_COUNT },
     ]);
-  }, []);
+  };
+
+  const insertTotalMoney = () => {
+    const cashDatas = cashData.reduce((prev, current) => {
+      return [...prev, { ...current }];
+    }, []);
+
+    return setInsertedMoney((prevInsertedMoney) => [
+      ...prevInsertedMoney,
+      ...cashDatas,
+    ]);
+  };
+
+  const insertMoneyFunctions = useMemo(
+    () => ({
+      insertMoney,
+      insertTotalMoney,
+    }),
+    []
+  );
 
   const resetInsertedMoney = useCallback((moneyCount) => {
     // 아무것도 구매하지 않고 반환버튼을 누른경우 그대로 돌려주는 함수
@@ -65,7 +84,7 @@ const MoneyProvider = ({ children }) => {
 
   return (
     <SetMoneyContext.Provider value={decreaseCashCount}>
-      <SetInsertedMoneyContext.Provider value={insertMoney}>
+      <SetInsertedMoneyContext.Provider value={insertMoneyFunctions}>
         <ResetInsertedMoneyContext.Provider value={resetInsertedMoney}>
           <MoneyContext.Provider value={moneyData}>
             <InsertedMoneyContext.Provider value={totalInsertedMoney}>

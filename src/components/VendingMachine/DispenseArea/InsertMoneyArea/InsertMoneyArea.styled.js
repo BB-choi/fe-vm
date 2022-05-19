@@ -13,6 +13,16 @@ const inputStyle = css`
   font-size: ${({ theme: { fontSizes } }) => fontSizes.extraLarge};
 `;
 
+const Wrapper = styled.div`
+  .alert {
+    margin-top: 0.5rem;
+    ${({ theme: { fontWeights, colors } }) => `
+    font-weight: ${fontWeights.bold};
+    color: ${colors.red}
+    `};
+  }
+`;
+
 const Form = styled.form`
   font-size: ${({ theme: { fontSizes } }) => fontSizes.normal};
   display: flex;
@@ -24,4 +34,4 @@ const Form = styled.form`
   }
 `;
 
-export { Form, insertButtonStyle, inputStyle };
+export { Wrapper, Form, insertButtonStyle, inputStyle };
