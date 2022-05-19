@@ -25,15 +25,21 @@ const {
 const { isWithinBaseMoney, computeTotalMoney } = moneyHelper;
 
 const MAX_INPUT_LENGTH = 5;
+const MIN_INPUT_LENGTH = 2;
 
 const isInputOverMaxLength = (input) => {
   return input.length > MAX_INPUT_LENGTH;
 };
 
+const isInputUnderMinLength = (input) => {
+  return input.length < MIN_INPUT_LENGTH;
+};
+
 const alertMessages = {
   initialMessage: "투입할 금액을 입력하세요.",
-  overMaxLength: `만 단위까지만 입력가능합니다.`,
-  overBaseMoney: `소지금 초과. 최대 금액이 투입됩니다.`,
+  underMinLength: "두 자리 이상 입력하세요.",
+  overMaxLength: "만 단위까지만 입력가능합니다.",
+  overBaseMoney: "소지금 초과. 최대 금액이 투입됩니다.",
 };
 
 const InsertMoneyArea = ({ value }) => {
@@ -50,13 +56,20 @@ const InsertMoneyArea = ({ value }) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (isInputOverMaxLength(inputRef.current.value)) {
+    const inputValue = inputRef.current.value;
+    if (isInputUnderMinLength(inputValue)) {
+      setMessage(alertMessages.underMinLength);
+      focusInput();
+      return;
+    }
+
+    if (isInputOverMaxLength(inputValue)) {
       setMessage(alertMessages.overMaxLength);
       focusInput();
       return;
     }
 
-    const inputNumber = Number(inputRef.current.value);
+    const inputNumber = Number(inputValue);
     const totalMoney = computeTotalMoney(cashData);
 
     if (!isWithinBaseMoney(inputNumber, totalMoney)) {
