@@ -18,16 +18,19 @@ const MoneyProvider = ({ children }) => {
   const [cashData, setCashData] = useState(cash);
   const [insertedMoney, setInsertedMoney] = useState([]);
 
-  const decreaseCashCount = useCallback((money) => {
-    setCashData((prevCashData) => {
-      return prevCashData.map((current) => {
-        if (current.money === money) {
-          return { ...current, count: current.count - DECREASE_COUNT };
-        }
-        return current;
+  const decreaseCashCount = useCallback(
+    (money, decreaseCount = DECREASE_COUNT) => {
+      setCashData((prevCashData) => {
+        return prevCashData.map((current) => {
+          if (current.money === money) {
+            return { ...current, count: current.count - decreaseCount };
+          }
+          return current;
+        });
       });
-    });
-  }, []);
+    },
+    []
+  );
 
   const moneyData = useMemo(
     () => ({
