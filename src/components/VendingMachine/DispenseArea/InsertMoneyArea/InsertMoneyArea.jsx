@@ -109,16 +109,18 @@ const InsertMoneyArea = () => {
       return;
     }
 
+    // 높은 금액부터 확인 후
     MONEY_ARR_DESC_ORDER.forEach((unit) => {
       const [{ money, count }] = cashData.filter(
         (current) => current.money === unit
       );
-      if (!inputNumber || money > inputNumber) {
+
+      if (inputNumber < 0 || money > inputNumber) {
         return;
       }
 
+      let moneyCount = count;
       if (!(inputNumber % money)) {
-        let moneyCount = count;
         while (inputNumber && moneyCount) {
           insertMoney(money);
           inputNumber -= money;
@@ -128,12 +130,29 @@ const InsertMoneyArea = () => {
         return;
       }
 
-      while (inputNumber > money) {
+      if (inputNumber > 0 && moneyCount) {
         insertMoney(money);
         inputNumber -= money;
+        moneyCount -= DECREASE_COUNT;
         updateProgress("insert", money);
       }
     });
+
+    // 여전히 inputNumber가 있으면 작은 금액부터 확인해서 다시 넣어줌
+    if (inputNumber) {
+      for (let i = 0; i < cashData.length; i += 1) {
+        const { money, count } = cashData[i];
+        if (count) {
+          insertMoney(money);
+          inputNumber -= money;
+          updateProgress("insert", money);
+        }
+
+        if (inputNumber < 0) {
+          break;
+        }
+      }
+    }
   };
 
   return (
