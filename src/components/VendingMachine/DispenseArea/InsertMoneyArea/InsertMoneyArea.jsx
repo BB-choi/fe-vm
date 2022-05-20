@@ -20,7 +20,7 @@ const {
   INITIAL_MONEY,
   DECREASE_COUNT,
   BUTTON_NAME: { INSERT },
-  DELAY_MS,
+  DELAY: { DEFAULT_DELAY_MS },
 } = constants;
 
 const alertMessages = {
@@ -77,13 +77,13 @@ const InsertMoneyArea = () => {
 
     setTimeout(() => {
       setMessage(initialMessage);
-    }, DELAY_MS);
+    }, DEFAULT_DELAY_MS);
   };
 
   const resetInputValue = () => {
     setTimeout(() => {
       setInputValue(INITIAL_INPUT_VALUE);
-    }, DELAY_MS);
+    }, DEFAULT_DELAY_MS);
   };
 
   const focusInput = () => {

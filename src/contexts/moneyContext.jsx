@@ -48,7 +48,6 @@ const MoneyProvider = ({ children }) => {
     ]);
   };
 
-  // 아무것도 구매하지 않고 반환버튼을 누른경우 그대로 돌려주는 함수
   const resetInsertedMoney = (moneyCount) => {
     setCashData((prevCashData) =>
       prevCashData.map((currentData) =>
@@ -83,7 +82,7 @@ const MoneyProvider = ({ children }) => {
           return { money: currentMoney, count: moneyCount };
         }
 
-        while (restInsertedMoney > currentMoney) {
+        while (restInsertedMoney >= currentMoney) {
           moneyCount += INCREASE_COUNT;
           restInsertedMoney -= currentMoney;
         }
@@ -119,11 +118,11 @@ const MoneyProvider = ({ children }) => {
 
   return (
     <MoneyActionsContext.Provider value={moneyActions}>
-      <MoneyContext.Provider value={moneyData}>
-        <InsertedMoneyContext.Provider value={totalInsertedMoney}>
+      <InsertedMoneyContext.Provider value={totalInsertedMoney}>
+        <MoneyContext.Provider value={moneyData}>
           {children}
-        </InsertedMoneyContext.Provider>
-      </MoneyContext.Provider>
+        </MoneyContext.Provider>
+      </InsertedMoneyContext.Provider>
     </MoneyActionsContext.Provider>
   );
 };

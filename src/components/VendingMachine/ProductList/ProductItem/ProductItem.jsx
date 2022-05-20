@@ -1,28 +1,55 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import Button from "components/common/form/Button/Button";
-import { MoneyActionsContext } from "contexts/moneyContext";
+import { SetDelayContext } from "contexts/delayContext";
+import {
+  InsertedMoneyContext,
+  MoneyActionsContext,
+} from "contexts/moneyContext";
 import { SetProgressContext } from "contexts/progressContext";
+import moneyHelper from "helper/moneyHelper";
 import constants from "utils/constants";
 
 import { productButtonStyle, ProductLi } from "./ProductItem.styled";
 
-const { SOLDOUT_MESSAGE } = constants;
-
+const {
+  SOLDOUT_MESSAGE,
+  DELAY: { DEFAULT_DELAY_MS },
+} = constants;
+const { getTotalInsertedMoney, computeTotalMoney } = moneyHelper;
 const ProductItem = ({ productData, currentMoney }) => {
-  const { name, isInStock, price } = productData;
-  const isAvailablePurchase = currentMoney >= price;
+  const [isInPurchaseProgress, setIsInPurchaseProgress] = useState(false);
 
+  const { insertedMoney } = useContext(InsertedMoneyContext);
+  const { spendInsertedMoney, resetInsertedMoney } =
+    useContext(MoneyActionsContext);
+  const setLoadingState = useContext(SetDelayContext);
   const updateProgress = useContext(SetProgressContext);
-  const { spendInsertedMoney } = useContext(MoneyActionsContext);
+
+  const { name, isInStock, price, id } = productData;
+  const isAvailablePurchase = currentMoney >= price;
 
   const handleProductButtonClick = () => {
     updateProgress("purchase", price, name);
-    // 2초 후 금액 소비
-    spendInsertedMoney(price);
-    // 2초후 잔액반환
-    // 2초후 updateProgress
+    setLoadingState(true);
+
+    setTimeout(() => {
+      setIsInPurchaseProgress(true);
+    }, DEFAULT_DELAY_MS);
   };
+
+  useEffect(() => {
+    if (!isInPurchaseProgress) {
+      return;
+    }
+
+    setIsInPurchaseProgress(false);
+    setLoadingState(false);
+
+    spendInsertedMoney(price);
+    resetInsertedMoney(getTotalInsertedMoney(insertedMoney));
+    updateProgress("return", computeTotalMoney(insertedMoney), name);
+  }, [isInPurchaseProgress]);
 
   return (
     <ProductLi isAvailablePurchase={isAvailablePurchase} isInStock={isInStock}>
@@ -31,7 +58,7 @@ const ProductItem = ({ productData, currentMoney }) => {
         styles={productButtonStyle}
         className="product-button"
         isClickable={isInStock && isAvailablePurchase}
-        onClick={handleProductButtonClick}
+        onClick={() => handleProductButtonClick({ id, price, name })}
       />
       <p className="product-price">{(isInStock && price) || SOLDOUT_MESSAGE}</p>
     </ProductLi>
