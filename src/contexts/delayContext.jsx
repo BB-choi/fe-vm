@@ -1,19 +1,21 @@
-const { useState, createContext, useCallback } = require("react");
+import { useState, createContext, useCallback } from "react";
+
+import Loading from "components/Loading/Loading";
 
 export const DelayContext = createContext(() => {});
 export const SetDelayContext = createContext(() => {});
 
 const DelayProvider = ({ children }) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [purchasingItem, setPurchasingItem] = useState("");
 
-  const setLoadingState = useCallback((newLoadingState) => {
-    setIsLoading(() => newLoadingState);
+  const setPurchasingNewItem = useCallback((newLoadingState) => {
+    setPurchasingItem(() => newLoadingState);
   }, []);
 
   return (
-    <SetDelayContext.Provider value={setLoadingState}>
-      <DelayContext.Provider value={isLoading}>
-        {isLoading && "hi"}
+    <SetDelayContext.Provider value={setPurchasingNewItem}>
+      <DelayContext.Provider value={purchasingItem}>
+        {purchasingItem && <Loading productName={purchasingItem} />}
         {children}
       </DelayContext.Provider>
     </SetDelayContext.Provider>

@@ -23,7 +23,7 @@ const ProductItem = ({ productData, currentMoney }) => {
   const { insertedMoney } = useContext(InsertedMoneyContext);
   const { spendInsertedMoney, resetInsertedMoney } =
     useContext(MoneyActionsContext);
-  const setLoadingState = useContext(SetDelayContext);
+  const setPurchasingNewItem = useContext(SetDelayContext);
   const updateProgress = useContext(SetProgressContext);
 
   const { name, isInStock, price, id } = productData;
@@ -31,7 +31,7 @@ const ProductItem = ({ productData, currentMoney }) => {
 
   const handleProductButtonClick = () => {
     updateProgress("purchase", price, name);
-    setLoadingState(true);
+    setPurchasingNewItem(name);
 
     setTimeout(() => {
       setIsInPurchaseProgress(true);
@@ -44,7 +44,7 @@ const ProductItem = ({ productData, currentMoney }) => {
     }
 
     setIsInPurchaseProgress(false);
-    setLoadingState(false);
+    setPurchasingNewItem("");
 
     spendInsertedMoney(price);
     resetInsertedMoney(getTotalInsertedMoney(insertedMoney));
