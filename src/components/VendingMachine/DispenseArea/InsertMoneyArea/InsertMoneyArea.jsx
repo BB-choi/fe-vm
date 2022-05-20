@@ -152,7 +152,7 @@ const InsertMoneyArea = () => {
         return;
       }
 
-      while (inputMoney > money && moneyCount > 0) {
+      while (money >= inputMoney && moneyCount > 0) {
         insertMoney(money);
         inputMoney -= money;
         moneyCount -= DECREASE_COUNT;
