@@ -32,6 +32,7 @@ const ProductItem = ({ productData, currentMoney }) => {
   const handleProductButtonClick = () => {
     updateProgress("purchase", price, name);
     setPurchasingNewItem(name);
+    spendInsertedMoney(price);
 
     setTimeout(() => {
       setIsInPurchaseProgress(true);
@@ -45,8 +46,6 @@ const ProductItem = ({ productData, currentMoney }) => {
 
     setIsInPurchaseProgress(false);
     setPurchasingNewItem("");
-
-    spendInsertedMoney(price);
     resetInsertedMoney(getTotalInsertedMoney(insertedMoney));
     updateProgress("return", computeTotalMoney(insertedMoney), name);
   }, [isInPurchaseProgress]);
