@@ -27,6 +27,7 @@ const alertMessages = {
   initialMessage: "투입할 금액을 입력하세요.",
   underMinLength: "두 자리 이상 입력하세요.",
   notValidLastIndex: "일의 자리가 유효하지 않습니다.",
+  inputIsZero: "0원은 입력할 수 없습니다.",
   overMaxLength: "만 단위까지만 입력 가능합니다.",
   overBaseMoney: "소지금 초과. 최대 금액이 투입됩니다.",
   hasNoMoney: "소지한 금액이 없습니다.",
@@ -43,6 +44,7 @@ const {
   overMaxLength,
   notValidLastIndex,
   initialMessage,
+  inputIsZero,
 } = alertMessages;
 
 const { isWithinBaseMoney, computeTotalMoney } = moneyHelper;
@@ -60,6 +62,10 @@ const isInputUnderMinLength = (input) => {
 
 const isLastIndexZero = (input) => {
   return input[input.length - 1] === "0";
+};
+
+const isInputNumberZero = (input) => {
+  return input === 0;
 };
 
 const InsertMoneyArea = () => {
@@ -107,6 +113,11 @@ const InsertMoneyArea = () => {
 
     if (isInputOverMaxLength(currentInputValue)) {
       showMessage(overMaxLength);
+      return false;
+    }
+
+    if (isInputNumberZero(Number(currentInputValue))) {
+      showMessage(inputIsZero);
       return false;
     }
 
