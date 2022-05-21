@@ -177,7 +177,7 @@ const InsertMoneyArea = () => {
         break;
       }
 
-      if (count) {
+      if (count > 0) {
         insertMoney(money);
         inputMoney -= money;
         updateProgress("insert", money);
