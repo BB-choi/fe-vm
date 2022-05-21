@@ -172,19 +172,26 @@ const InsertMoneyArea = () => {
     let inputMoney = inputNumber;
     for (let i = 0; i < cashData.length; i += 1) {
       const { money, count } = cashData[i];
+      console.log(
+        `오름차순에서 inputMoney${inputMoney}로 확인중, 입력은 ${inputNumber} 현재금액 ${money} ${count}`
+      );
 
-      if (inputMoney < 0 || money > inputMoney) {
+      if (inputMoney <= 0) {
         break;
       }
 
-      if (count > 0) {
-        insertMoney(money);
-        inputMoney -= money;
-        updateProgress("insert", money);
-        console.log(
-          `오름차순에서 ${money}원 입력: 현재 남은 inputMoney${inputMoney}, 입력은 ${inputNumber}`
-        );
+      if (count <= 0) {
+        continue;
       }
+
+      // if (count > 0) {
+      insertMoney(money);
+      inputMoney -= money;
+      updateProgress("insert", money);
+      console.log(
+        `오름차순에서 ${money}원 입력: 현재 남은 inputMoney${inputMoney}, 입력은 ${inputNumber}`
+      );
+      // }
     }
   };
 
